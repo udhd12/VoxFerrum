@@ -1,0 +1,19 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'dev.voxferrum'
+    compileSdk 36
+    defaultConfig {
+        applicationId 'dev.voxferrum'
+        minSdk 29
+        targetSdk 35
+        versionCode 7
+        versionName '1.3.3'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

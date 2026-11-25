@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/widget_body"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+    android:gravity="center_vertical" android:padding="10dp" android:background="@drawable/widget_panel">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+        <TextView android:text="VOX FERRUM" android:fontFamily="serif" android:textStyle="bold" android:textColor="#F1DBB8" android:textSize="17sp"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
+        <TextView android:id="@+id/widget_archive" android:text="Архив ↗" android:textColor="#E3B875" android:padding="6dp"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <TextView android:id="@+id/widget_state" android:text="Захват выключен" android:textColor="#E4D5C4" android:textSize="13sp"
+        android:layout_width="match_parent" android:layout_height="wrap_content" android:maxLines="1" android:ellipsize="end"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:gravity="center_vertical">
+        <TextView android:id="@+id/widget_save" android:text="Включить" android:textColor="#FFFFFF" android:background="@drawable/widget_key"
+            android:gravity="center" android:layout_width="0dp" android:layout_weight="1.3" android:layout_height="44dp"/>
+        <TextView android:id="@+id/widget_mark" android:text="Метка" android:textColor="#EBD7B9" android:gravity="center"
+            android:layout_width="0dp" android:layout_weight="1" android:layout_height="44dp"/>
+        <TextView android:id="@+id/widget_stop" android:text="Стоп" android:textColor="#EBD7B9" android:gravity="center"
+            android:layout_width="0dp" android:layout_weight=".8" android:layout_height="44dp"/>
+    </LinearLayout>
+</LinearLayout>
