@@ -1,59 +1,82 @@
 # Vox Ferrum
 
-Аудиоповтор для Android 10 и новее. Выберите звук приложений, микрофон или оба источника сразу. Vox Ferrum сохраняет последние 15 секунд — 15 минут в стерео WAV, 48 кГц, 16 бит.
+Vox Ferrum is an audio-only instant replay app for Android 10 and later. It keeps a rolling buffer of sound from your apps, your microphone, or both. When something worth keeping happens, save the last 15 seconds to 15 minutes as a 48 kHz, 16-bit stereo WAV.
 
-## Как пользоваться
+[Download the APK](https://github.com/udhd12/VoxFerrum/releases/latest)
 
-1. Откройте приложение до запуска игры. Выберите 15 или 30 секунд либо 1, 2, 5, 10 или 15 минут. Установите усиление от 0 до +18 дБ. Усиление действует на сохраняемый файл. При 0 дБ значения отсчётов сохраняются без изменений.
-2. На вкладке **Повтор** нажмите **Источник** и выберите режим. В режиме **Звук приложений** записывается разрешённое воспроизведение. В режиме **Микрофон** записывается окружающий звук. В режиме **Приложения + микрофон** голос и звук игры сводятся в один WAV. Наушники помогут избежать повторного попадания звука динамика в микрофон. Чтобы сменить источник, остановите захват.
-   Нажмите **Включить повтор** и разрешите доступ к аудио. Для записи звука приложений Android также покажет системное подтверждение захвата. Видеодорожка не создаётся. В режиме микрофона это подтверждение не требуется.
-3. Когда услышите нужный момент, раскройте уведомление Vox Ferrum и нажмите **Сохранить**. Можно сохранить ещё один клип, пока буфер продолжает работать. Если буфер заполнялся меньше выбранного времени, в файл попадёт весь доступный фрагмент.
-4. Откройте **Архив** для прослушивания или отправки. WAV-файлы также доступны в папке **Music/VoxFerrum** на телефоне. Остановка захвата сбрасывает временный буфер.
-5. В **Настройки → Оформление** выберите «Кузница Омниссии» или «Прилив».
+## Getting started
 
-В коротких режимах буфер работает в оперативной памяти. Для длинного повтора приложение хранит звук во временных сегментах в закрытой папке. Сеанс на 15 минут занимает до 175 МБ временного места, а полный сохранённый WAV — ещё 173 МБ. При увеличении окна во время игры недостающая история накапливается с этого момента. Счётчик показывает доступное время.
+The app interface is in Russian. On the **Replay** tab (Повтор), tap **Source** (Источник) and choose what to record.
 
-Игры и проигрыватели могут запрещать копирование своего звука. В таком случае на их участке записи будет тишина. Запись разговоров в звонках не поддерживается. [Ограничения Android](https://developer.android.com/media/platform/av-capture)
+| Source in the app | What goes into the clip |
+| --- | --- |
+| Звук приложений | Audio from games and players that allow playback capture |
+| Микрофон | Your voice and sounds around the phone |
+| Приложения + микрофон | App audio and microphone input mixed into one WAV. Use headphones to keep the microphone from picking up the speakers a second time. |
 
-## Фоновая запись
+1. Open Vox Ferrum before starting your game. Choose a replay length of 15 or 30 seconds, or 1, 2, 5, 10, or 15 minutes. Export gain ranges from 0 to +18 dB. At 0 dB, the saved samples keep their original levels.
+2. Tap **Enable replay** (Включить повтор) and grant microphone access. To capture app audio, also accept the Android screen-sharing prompt. Vox Ferrum uses it to capture audio only. Microphone-only mode needs just the microphone permission.
+3. To keep a moment, expand the Vox Ferrum notification and tap **Save** (Сохранить). Capture continues while the clip is saved. If the buffer has not filled yet, the clip contains the audio collected so far.
+4. Open **Archive** (Архив) to listen or share. You can also find the WAV files in `Music/VoxFerrum` on your phone. To switch sources, stop capture first. Stopping clears the temporary buffer.
+5. Under **Settings → Appearance** (Настройки → Оформление), choose **Forge of the Omnissiah** or **Tide**.
 
-После запуска повтора можно свернуть приложение или смахнуть его карточку из недавних. Для сохранения и остановки используйте уведомление. На Android 15 QPR1 и новее блокировка экрана может завершить системный сеанс захвата звука приложений. В совместном режиме Vox Ferrum продолжит пополнять тот же буфер с микрофона. После разблокировки откройте **Повтор → Вернуть звук приложений** и подтвердите новый системный запрос. Звук приложений снова появится с этого момента. При полном выключении телефона или принудительной остановке приложения запись прекращается. [Поведение Android при блокировке](https://developer.android.com/media/grow/media-projection)
+Short replays use RAM. Longer replays use temporary segments in the app’s private storage. Allow up to 175 MB for a 15-minute buffer and another 173 MB to save a full-length WAV. If you increase the replay length during a game, the extra history builds up from that point. The counter shows how much audio is available.
 
-## Если не слышно микрофон
+Games and players can block playback capture. Their audio will be silent in the clip. Call recording is unsupported. [Android playback capture restrictions](https://developer.android.com/media/platform/av-capture)
 
-На Android 11 и новее остановите повтор и выберите источник с микрофоном. Переключатель **Приоритет записи** просит Android считать захват конфиденциальным. Включите его перед запуском повтора, если при открытии игры Vox Ferrum получает тишину. При конфликте игровой голосовой чат может лишиться входного звука. Системные ограничения доступа и приоритет звонков сохраняются. По умолчанию опция выключена.
+## Background recording
 
-На вкладке **Повтор** выберите **Микрофон** или **Приложения + микрофон**, включите буфер и скажите несколько слов. Шкала **Сигнал микрофона** измеряет вход до сведения с игрой. Рядом указаны активный вход и частота. Если подключена гарнитура, можно остановить захват и выбрать **Вход → Встроенный микрофон телефона**. Итоговую маршрутизацию определяет Android.
+Once replay is running, you can switch apps or swipe Vox Ferrum away from Recents. Use the notification to save a clip or stop recording.
 
-Если шкала остаётся пустой, проверьте разрешение Vox Ferrum на микрофон, системный переключатель «Доступ к микрофону» и приложения, которые в этот момент записывают голос. Когда Android сообщает, что он заглушил вход, Vox Ferrum показывает это отдельно от обычной тишины. [Совместное использование аудиовхода в Android](https://developer.android.com/media/platform/sharing-audio-input)
+On Android 15 QPR1 and later, locking the screen can end the system’s playback capture session. In mixed mode, the microphone continues recording into the same buffer. After unlocking, open **Replay → Restore app audio** (Вернуть звук приложений) and approve the new Android prompt. App audio resumes from that moment. Powering off the phone or force-stopping Vox Ferrum ends recording. [Android media projection behavior](https://developer.android.com/media/grow/media-projection)
 
-## После перезагрузки или полного выключения
+## If the microphone is silent
 
-После установки откройте Vox Ferrum хотя бы один раз и разрешите уведомления. Опция **Настройки → Запуск после включения телефона** включена по умолчанию. После первой разблокировки нажмите уведомление **Включить аудиоповтор?**. В режиме микрофона это запустит новый буфер, если доступ к микрофону уже разрешён. Для звука приложений или совместной записи подтвердите новый сеанс в окне Android.
+1. Choose a source that includes the microphone, start replay, and say a few words. The **Microphone signal** meter (Сигнал микрофона) shows the input level before mixing. The active input and sample rate appear beside it.
+2. If a headset is connected, stop capture and try **Input → Built-in phone microphone** (Вход → Встроенный микрофон телефона). Android makes the final routing decision.
+3. Check the app’s microphone permission, Android’s **Microphone access** switch, and any other apps recording your voice. Vox Ferrum shows a specific warning when Android reports that it has silenced the input.
+4. If the microphone cuts out when a game opens, stop replay, select a microphone source, and enable **Recording priority** (Приоритет записи) before restarting. On Android 11 and later, this asks Android to treat the recording as privacy-sensitive. The game’s voice chat may then lose microphone input. The setting is off by default. Calls retain priority, and system access restrictions still apply. [How Android shares audio input](https://developer.android.com/media/platform/sharing-audio-input)
 
-Если уведомления отключены, откройте приложение с рабочего стола после загрузки. Оно предложит запустить выбранный режим. Если вы смахнули уведомление, в этот раз запуск останется ручным. Между включением телефона и началом нового сеанса звук не сохраняется. [Требования Android к службам захвата](https://developer.android.com/develop/background-work/services/fgs/service-types)
+## After a reboot or power-off
 
-## Быстрые действия
+Open Vox Ferrum at least once after installation and allow notifications. **Settings → Start after power-on** is enabled by default. After the first unlock, tap the **Enable audio replay?** notification. Microphone mode starts a fresh buffer if permission has already been granted. App audio and mixed mode require fresh approval in the Android capture dialog.
 
-В настройках Vox Ferrum нажмите **Добавить плитку в шторку** или **Добавить виджет**. Если рабочий стол не поддерживает закрепление из приложения, найдите Vox Ferrum в списке виджетов вручную. Кнопка запуска использует выбранный источник и при необходимости открывает системное подтверждение. Во время записи плитка сохраняет повтор, а виджет также позволяет поставить метку, остановить захват и открыть архив. Успешное сохранение сопровождается короткой вибрацией на устройствах с вибромотором.
+If notifications are disabled, open Vox Ferrum from the launcher after boot and follow the prompt for your selected mode. If you dismiss the notification, you can still start replay manually. Recording begins when the new session starts. [Android capture service requirements](https://developer.android.com/develop/background-work/services/fgs/service-types)
 
-**Метка** в приложении, виджете или уведомлении запоминает текущую позицию в буфере. В каждый сохранённый WAV попадают метки его интервала. Их позиции хранятся в приложении. При 12 секундах практически нулевого сигнала появляется подсказка о тишине. В «Кузнице» красная линза показывает активный захват, латунная дуга — заполнение выбранного окна, а восковая печать на короткое время подтверждает сохранение.
+## Quick Settings, widget, and markers
 
-## Редактирование и архив
+In Vox Ferrum settings, tap **Add Quick Settings tile** or **Add widget**. If your launcher does not support adding a widget from the app, select Vox Ferrum from the launcher’s widget picker.
 
-В **Архив → Обрезать** перетащите ближайшую границу прямо на волне или используйте ползунки. Кнопки − и + сдвигают границу на 0,1 секунды. Выбор метки выделяет до пяти секунд по обе стороны от неё. Нажмите **Слушать выделенное**, затем **Отправить выделенное…** и выберите Telegram-бота или меню Android. Укороченный фрагмент сохраняется отдельным WAV с метками выбранного участка. При выборе всей записи используется оригинал.
+The start control uses your selected source and opens the system consent dialog when needed. During recording, tap the tile to save a replay. The widget also lets you add a marker, stop capture, or open the archive. On phones with vibration support, a short vibration confirms a successful save.
 
-Шестерня на карточке добавляет запись в избранное. Кнопка **Избранное** фильтрует архив. **Очистка…** предлагает записи старше 7, 30 или 90 дней, показывает их число и размер и запрашивает подтверждение. Избранное исключается из удаления.
+Tap **Mark** (Метка) in the app, widget, or notification to mark the current moment. Each saved clip includes the markers that fall within its time range. Their positions are stored in the app. After 12 seconds of near-silence, Vox Ferrum displays a hint. In the Forge theme, the red lens indicates active capture, the brass arc shows how much of the replay window is full, and a wax seal briefly appears when a clip is saved.
 
-## Telegram
+## Trimming and managing clips
 
-- Чтобы отправить клип **как пользователь существующему боту**, откройте **Архив**, нажмите **↗** у клипа и выберите Telegram и чат с ботом. В этом случае токен не нужен.
-- Чтобы **свой бот отправлял клипы в заданный чат**, создайте бота у [@BotFather](https://t.me/BotFather). Для личного чата откройте бота и нажмите **Старт**. Для канала дайте боту право на публикацию.
-- В **Настройки → Настроить бота** введите токен и числовой ID чата либо публичное @имя канала. Токен и адресат шифруются на телефоне с ключом из Android Keystore. В диалоге настройки есть кнопка **Отключить**.
-- В архиве нажмите **Telegram**, проверьте адресата и подтвердите отправку. Бот отправляет WAV размером до 50 МБ. Для более длинных файлов приложение создаёт копию M4A с кодеком AAC. В архиве остаётся исходный WAV. [Ограничения Telegram Bot API](https://core.telegram.org/bots/api#senddocument)
+Open **Archive → Trim** (Архив → Обрезать). Drag a selection boundary on the waveform or use the sliders. The **−** and **+** buttons move the boundary by 0.1 seconds. Selecting a marker picks up to five seconds on either side of it.
 
-## Сборка из исходников
+Tap **Listen to selection**, then **Send selection…** and choose the Telegram bot or Android’s share menu. A trimmed selection is saved as a separate WAV with the markers inside it. Selecting the entire recording uses the original file.
 
-Откройте эту папку в Android Studio. Для сборки нужны JDK 17 и Android SDK Platform 36. В Windows выполните `.\gradlew.bat assembleDebug` из этой папки с настроенным ANDROID_HOME или sdk.dir в local.properties. Результат появится в `app/build/outputs/apk/debug/app-debug.apk`.
+Tap the gear on a clip to add it to your favorites. **Favorites** filters the archive. **Clean up…** lets you review clips older than 7, 30, or 90 days and shows their count and size before asking for confirmation. Cleanup preserves favorites.
 
-Для разработки использовался плагин Codex `agent-skills`, для иллюстрации «Кузницы» — ImageGen, для сборки — Android Gradle Plugin `com.android.application` версии 8.13.2. Для работы установленного APK плагины не требуются.
+## Sharing to Telegram
+
+**To send a clip from your Telegram account**, tap **↗** beside the clip in the archive, choose Telegram, and select the chat with the bot. This works without a bot token.
+
+**To have your own bot deliver clips to a chat or channel:**
+
+1. Create a bot with [@BotFather](https://t.me/BotFather). For a private chat, open the bot and tap **Start**. For a channel, grant the bot permission to post.
+2. Under **Settings → Configure bot**, enter the token and either the numeric chat ID or the channel’s public `@username`. The app encrypts the token and destination on the phone using a key from Android Keystore. Tap **Disconnect** in the same dialog to disconnect the bot.
+3. In the archive, tap **Telegram**, check the destination, and confirm. The bot sends WAV files up to 50 MB. For larger files, the app creates an AAC-encoded M4A copy for sending and keeps the original WAV in the archive. [Telegram Bot API file limits](https://core.telegram.org/bots/api#senddocument)
+
+## Building from source
+
+Open the project in Android Studio with JDK 17 and Android SDK Platform 36 installed. Set `ANDROID_HOME` or specify `sdk.dir` in `local.properties`. From the project root on Windows, run:
+
+```powershell
+.\gradlew.bat assembleDebug
+```
+
+The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
+
+Development used the Codex `agent-skills` plugin and ImageGen for the Forge artwork. The build uses Android Gradle Plugin 8.13.2 (`com.android.application`). The installed app runs without plugins.
