@@ -79,4 +79,4 @@ Open the project in Android Studio with JDK 17 and Android SDK Platform 36 insta
 
 The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
 
-Development used the Codex `agent-skills` plugin and ImageGen for the Forge artwork. The build uses Android Gradle Plugin 8.13.2 (`com.android.application`). The installed app runs without plugins.
+Development used the Codex  and ImageGen for the Forge artwork. The build uses Android Gradle Plugin 8.13.2 (`com.android.application`). The installed app runs without plugins.
