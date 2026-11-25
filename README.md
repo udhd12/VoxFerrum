@@ -4,6 +4,12 @@ Vox Ferrum is an audio-only instant replay app for Android 10 and later. It keep
 
 [Download the APK](https://github.com/udhd12/VoxFerrum/releases/latest)
 
+### How to save the last 30 seconds of audio on Android
+
+Choose a 30-second replay and start capture before opening your game. When you hear something you want to keep, expand the Vox Ferrum notification and tap **Save**. The clip appears in your archive, and the buffer keeps recording.
+
+[![Download the 15-second illustrated walkthrough with sample audio](docs/replay-preview.png)](https://github.com/udhd12/VoxFerrum/releases/download/v1.3.3/VoxFerrum-demo.mp4)
+
 ## Getting started
 
 The app interface is in Russian. On the **Replay** tab (Повтор), tap **Source** (Источник) and choose what to record.
