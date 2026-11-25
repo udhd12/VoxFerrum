@@ -1,0 +1,226 @@
+<resources>
+    <string name="archive" formatted="false">"Архив"</string>
+    <string name="favorites" formatted="false">"Избранное"</string>
+    <string name="clean_up" formatted="false">"Очистка…"</string>
+    <string name="loading_clips" formatted="false">"Загружаем клипы…"</string>
+    <string name="could_not_read_the_archive_check_that" formatted="false">"Не удалось прочитать архив. Проверьте доступность хранилища."</string>
+    <string name="d_clips_1f_mb" formatted="false">"Записей: %d   ·   %.1f МБ"</string>
+    <string name="show_all" formatted="false">"Показать все"</string>
+    <string name="no_favorites_yet" formatted="false">"Избранных записей пока нет."</string>
+    <string name="no_clips_yet_start_replay_and_save" formatted="false">"Пока пусто. Включите повтор и сохраните фрагмент."</string>
+    <string name="older_than_7_days" formatted="false">"Старше 7 дней"</string>
+    <string name="older_than_30_days" formatted="false">"Старше 30 дней"</string>
+    <string name="older_than_90_days" formatted="false">"Старше 90 дней"</string>
+    <string name="clean_up_archive" formatted="false">"Очистить архив"</string>
+    <string name="cancel" formatted="false">"Отмена"</string>
+    <string name="no_clips_outside_favorites_match_this_age" formatted="false">"Нет записей под выбранный срок вне избранного"</string>
+    <string name="clips_older_than_d_days_d_1f" formatted="false">"Записей старше %d дней: %d (%.1f МБ). Избранное сохранится."</string>
+    <string name="delete_old_recordings" formatted="false">"Удалить старые записи?"</string>
+    <string name="delete" formatted="false">"Удалить"</string>
+    <string name="deleted" formatted="false">"Удалено: "</string>
+    <string name="of" formatted="false">" из "</string>
+    <string name="label_1f_s" formatted="false">"%.1f с"</string>
+    <string name="wav_s_1f_mb" formatted="false">"WAV   ·   %s   ·   %.1f МБ"</string>
+    <string name="stop" formatted="false">"Стоп"</string>
+    <string name="play" formatted="false">"Слушать"</string>
+    <string name="share_file" formatted="false">"Поделиться файлом "</string>
+    <string name="trim" formatted="false">"Обрезать"</string>
+    <string name="favorited" formatted="false">"⚙ В избранном"</string>
+    <string name="favorite" formatted="false">"⚙ В избранное"</string>
+    <string name="share_recording" formatted="false">"Поделиться записью"</string>
+    <string name="no_app_available_to_share_this_file" formatted="false">"Нет приложения для отправки файла."</string>
+    <string name="file_unavailable_for_playback" formatted="false">"Файл недоступен для воспроизведения."</string>
+    <string name="after_power_on" formatted="false">"После включения телефона"</string>
+    <string name="prompt_to_start_audio_replay_after_unlocking" formatted="false">"Предложение включить аудиоповтор после разблокировки"</string>
+    <string name="phone_restarted_tap_to_start_the_microphone" formatted="false">"Телефон включён. Нажмите, чтобы запустить буфер микрофона."</string>
+    <string name="phone_restarted_tap_to_approve_app_audio" formatted="false">"Телефон включён. Нажмите и подтвердите захват звука приложений."</string>
+    <string name="start_audio_replay" formatted="false">"Включить аудиоповтор?"</string>
+    <string name="enable_replay" formatted="false">"Включить повтор"</string>
+    <string name="start_after_power_on" formatted="false">"Запуск после включения телефона"</string>
+    <string name="allow_notifications" formatted="false">"Разрешить уведомления"</string>
+    <string name="start_replay_manually_after_a_restart" formatted="false">"После перезагрузки повтор запускается вручную."</string>
+    <string name="after_unlocking_tap_enable_replay_in_the" formatted="false">"После первой разблокировки нажмите «Включить повтор» в уведомлении. Для звука приложений Android попросит подтвердить захват."</string>
+    <string name="notifications_are_off_open_vox_ferrum_after" formatted="false">"Уведомления отключены. При первом открытии Vox Ferrum после загрузки запустится выбранный режим."</string>
+    <string name="system_input" formatted="false">"Системный вход"</string>
+    <string name="built_in_microphone" formatted="false">"Встроенный микрофон"</string>
+    <string name="wired_headset" formatted="false">"Проводная гарнитура"</string>
+    <string name="bluetooth_headset" formatted="false">"Гарнитура Bluetooth"</string>
+    <string name="usb_microphone" formatted="false">"USB-микрофон"</string>
+    <string name="selected_by_android" formatted="false">" (выбор Android)"</string>
+    <string name="s_s_hz" formatted="false">"%s · %s Гц"</string>
+    <string name="android_microphone_access_is_off_enable_it" formatted="false">"Микрофон выключен в Android. Включите доступ к микрофону в быстрых настройках."</string>
+    <string name="android_has_silenced_vox_ferrum_check_microphone" formatted="false">"Android заглушил микрофон для Vox Ferrum. Проверьте системный доступ и закройте другие приложения, использующие микрофон."</string>
+    <string name="file_unavailable" formatted="false">"Файл недоступен"</string>
+    <string name="invalid_selection" formatted="false">"Неверные границы"</string>
+    <string name="incomplete_wav" formatted="false">"Неполный WAV"</string>
+    <string name="could_not_create_file" formatted="false">"Не удалось создать файл"</string>
+    <string name="file_was_not_published" formatted="false">"Файл не опубликован"</string>
+    <string name="waveform_and_markers_use_the_sliders_below" formatted="false">"Звуковая волна и метки. Для точного выбора используйте ползунки ниже."</string>
+    <string name="app_audio" formatted="false">"Звук приложений"</string>
+    <string name="microphone" formatted="false">"Микрофон"</string>
+    <string name="apps_microphone" formatted="false">"Приложения + микрофон"</string>
+    <string name="tide" formatted="false">"ПРИЛИВ"</string>
+    <string name="omnissiah" formatted="false">"ОМНИССИЯ"</string>
+    <string name="replay" formatted="false">"Повтор"</string>
+    <string name="settings" formatted="false">"Настройки"</string>
+    <string name="min" formatted="false">" мин"</string>
+    <string name="s" formatted="false">" с"</string>
+    <string name="replay_buffer" formatted="false">"Буфер повтора"</string>
+    <string name="audio_level" formatted="false">"Уровень звука"</string>
+    <string name="audio_source" formatted="false">"Источник звука"</string>
+    <string name="source" formatted="false">"Источник"</string>
+    <string name="recording_priority" formatted="false">"Приоритет записи"</string>
+    <string name="if_another_app_uses_the_microphone_vox" formatted="false">"При конфликте Vox Ferrum запросит микрофон для себя. Голосовой чат игры может перестать слышать вас."</string>
+    <string name="microphone_input_level" formatted="false">"Уровень отдельного сигнала микрофона"</string>
+    <string name="stop_capture" formatted="false">"Остановить захват"</string>
+    <string name="mark" formatted="false">"Метка"</string>
+    <string name="restore_app_audio" formatted="false">"Вернуть звук приложений"</string>
+    <string name="replay_length" formatted="false">"Длина повтора"</string>
+    <string name="clip_gain" formatted="false">"Усиление клипа"</string>
+    <string name="saved_audio_gain_in_decibels" formatted="false">"Усиление сохраняемого звука в децибелах"</string>
+    <string name="microphone_input" formatted="false">"Вход микрофона"</string>
+    <string name="let_android_choose" formatted="false">"По выбору Android"</string>
+    <string name="built_in_phone_microphone" formatted="false">"Встроенный микрофон телефона"</string>
+    <string name="android_default" formatted="false">"Выбор Android"</string>
+    <string name="input" formatted="false">"Вход: "</string>
+    <string name="microphone_signal" formatted="false">"Сигнал микрофона"</string>
+    <string name="microphone_signal_alt" formatted="false">"Сигнал микрофона · "</string>
+    <string name="db" formatted="false">" дБ"</string>
+    <string name="audio_source_alt" formatted="false">"Источник звука. "</string>
+    <string name="stop_capture_to_change_it" formatted="false">". Для смены остановите захват."</string>
+    <string name="change" formatted="false">". Изменить."</string>
+    <string name="live" formatted="false">"В эфире  ·  "</string>
+    <string name="capture_off" formatted="false">"Захват выключен"</string>
+    <string name="saving" formatted="false">"Сохранение…"</string>
+    <string name="save_replay" formatted="false">"Сохранить повтор"</string>
+    <string name="starting" formatted="false">"Запуск…"</string>
+    <string name="buffer_off" formatted="false">"Буфер выключен"</string>
+    <string name="buffer_active" formatted="false">"Буфер включён"</string>
+    <string name="tap_save_in_the_notification_to_keep" formatted="false">"Чтобы сохранить момент, нажмите «Сохранить» в шторке уведомлений."</string>
+    <string name="the_replay_will_capture_your_voice_and" formatted="false">"В повтор попадут голос и звуки вокруг телефона."</string>
+    <string name="approve_app_audio_capture_if_android_stops" formatted="false">"Подтвердите захват звука приложений. Если Android отключит его при блокировке, микрофон продолжит запись до нажатия «Остановить захват»."</string>
+    <string name="replay_records_audio_from_apps_that_allow" formatted="false">"В повтор попадёт звук приложений, разрешающих захват. Android попросит доступ к экрану для передачи звука."</string>
+    <string name="enable_notifications_in_settings_to_save_from" formatted="false">"Для сохранения из шторки включите уведомления в настройках."</string>
+    <string name="appearance" formatted="false">"Оформление"</string>
+    <string name="forge_of_the_omnissiah" formatted="false">"Кузница Омниссии"</string>
+    <string name="tech_priest_engraving_brass_and_red_enamel" formatted="false">"Гравюра техножреца, латунь и красная эмаль"</string>
+    <string name="tide_alt" formatted="false">"Прилив"</string>
+    <string name="light_paper_and_sea_green" formatted="false">"Светлая бумага и морская волна"</string>
+    <string name="connect_your_bot_to_send_selected_clips" formatted="false">"Укажите своего бота и чат, чтобы отправлять выбранные клипы из архива."</string>
+    <string name="configure_bot" formatted="false">"Настроить бота"</string>
+    <string name="quick_access" formatted="false">"Быстрый доступ"</string>
+    <string name="add_widget" formatted="false">"Добавить виджет"</string>
+    <string name="add_quick_settings_tile" formatted="false">"Добавить плитку в шторку"</string>
+    <string name="audio_capture" formatted="false">"Захват звука"</string>
+    <string name="choose_a_source_on_the_replay_tab" formatted="false">"Источник выбирается на вкладке «Повтор» до начала захвата. Микрофон записывает звуки вокруг телефона. Звук игр и проигрывателей доступен, если приложение разрешает захват. В совместном режиме оба источника сохраняются в одном аудиофайле."</string>
+    <string name="replay_notifications" formatted="false">"Уведомления повтора"</string>
+    <string name="touch_and_hold_an_empty_area_on" formatted="false">"Удерживайте пустое место на рабочем столе, откройте «Виджеты» и выберите Vox Ferrum."</string>
+    <string name="got_it" formatted="false">"Понятно"</string>
+    <string name="audio_replay" formatted="false">"Аудиоповтор"</string>
+    <string name="tile_already_added" formatted="false">"Плитка уже добавлена"</string>
+    <string name="open_quick_settings_tap_edit_and_drag" formatted="false">"Раскройте быстрые настройки, нажмите «Изменить» и перенесите плитку «Аудиоповтор» в шторку."</string>
+    <string name="selected" formatted="false">". Выбрано"</string>
+    <string name="could_not_start_the_microphone_open_the" formatted="false">"Не удалось включить микрофон. Откройте приложение и попробуйте снова."</string>
+    <string name="system_capture_is_unavailable_on_this_device" formatted="false">"Системный захват недоступен на этом устройстве."</string>
+    <string name="allow_audio_access" formatted="false">"Разрешите доступ к звуку"</string>
+    <string name="allow_microphone_access_in_app_permissions_android" formatted="false">"В разрешениях приложения выберите «Микрофон». Android требует это разрешение и для внутреннего звука телефона."</string>
+    <string name="close" formatted="false">"Закрыть"</string>
+    <string name="app_audio_restore_canceled" formatted="false">"Возврат звука приложений отменён."</string>
+    <string name="capture_canceled" formatted="false">"Захват отменён."</string>
+    <string name="could_not_start_capture_open_the_app" formatted="false">"Не удалось включить захват. Откройте приложение и попробуйте снова."</string>
+    <string name="no_sound_for_12_seconds_check_playback" formatted="false">"Уже 12 секунд без звука. Проверьте воспроизведение и разрешает ли игра захват."</string>
+    <string name="app_audio_disconnected_microphone_recording_continues" formatted="false">"Звук приложений отключён. Микрофон продолжает запись."</string>
+    <string name="no_sound_for_12_seconds_check_the" formatted="false">"Уже 12 секунд без звука. Проверьте микрофон и его системный выключатель."</string>
+    <string name="no_sound_for_12_seconds_check_the_alt" formatted="false">"Уже 12 секунд без звука. Проверьте микрофон и воспроизведение в приложении."</string>
+    <string name="marker_added" formatted="false">"Метка добавлена"</string>
+    <string name="android_denied_capture_check_permissions_and_try" formatted="false">"Android не разрешил захват. Проверьте разрешения и повторите."</string>
+    <string name="could_not_open_the_microphone_check_the" formatted="false">"Не удалось открыть микрофон. Проверьте подключение гарнитуры и доступ к микрофону в настройках Android."</string>
+    <string name="could_not_open_both_sources_choose_one" formatted="false">"Не удалось открыть оба источника. Выберите один источник на вкладке «Повтор»."</string>
+    <string name="could_not_open_the_microphone_check_that" formatted="false">"Не удалось открыть микрофон. Проверьте, доступен ли он."</string>
+    <string name="could_not_open_app_audio_start_replay" formatted="false">"Не удалось открыть системный звук. Запустите буфер снова."</string>
+    <string name="could_not_restore_app_audio_microphone_recording" formatted="false">"Не удалось вернуть звук приложений. Микрофон продолжает запись."</string>
+    <string name="android_ended_capture_start_replay_again" formatted="false">"Android завершил захват. Запустите буфер снова."</string>
+    <string name="no_microphone_signal_detected_speak_and_check" formatted="false">"Микрофон не даёт заметного сигнала. Скажите несколько слов и проверьте выбранный вход."</string>
+    <string name="could_not_write_the_buffer_check_free" formatted="false">"Не удалось записать буфер. Проверьте свободное место на телефоне."</string>
+    <string name="audio_capture_interrupted_start_replay_again" formatted="false">"Захват звука прервался. Запустите буфер снова."</string>
+    <string name="buffer_is_empty" formatted="false">"Буфер пока пуст"</string>
+    <string name="saving_replay" formatted="false">"Сохраняется повтор…"</string>
+    <string name="replay_saved_to_music_voxferrum" formatted="false">"Повтор сохранён в Music/VoxFerrum"</string>
+    <string name="could_not_save_wav_check_free_storage" formatted="false">"Не удалось сохранить WAV. Проверьте свободное место."</string>
+    <string name="microphone_only" formatted="false">"только микрофон"</string>
+    <string name="microphone_alt" formatted="false">"микрофон"</string>
+    <string name="apps_microphone_alt" formatted="false">"приложения + микрофон"</string>
+    <string name="app_audio_alt" formatted="false">"звук приложений"</string>
+    <string name="saving_wav" formatted="false">"Сохранение WAV…"</string>
+    <string name="save" formatted="false">"Сохранить "</string>
+    <string name="stop_recording" formatted="false">"Остановить"</string>
+    <string name="enable" formatted="false">"Включить"</string>
+    <string name="buffer_is_silent" formatted="false">"В буфере тишина"</string>
+    <string name="live_alt" formatted="false">"В эфире · "</string>
+    <string name="replay_saved" formatted="false">"Повтор сохранён"</string>
+    <string name="save_alt" formatted="false">"Сохранить"</string>
+    <string name="create_a_bot_with_botfather_and_tap" formatted="false">"Создайте бота у @BotFather и нажмите «Старт» в чате с ним. "</string>
+    <string name="enter_the_recipient_chat_id_or_the" formatted="false">"Укажите числовой ID получателя или @имя канала, где бот может публиковать."</string>
+    <string name="could_not_read_saved_settings_enter_them" formatted="false">"Не удалось прочитать сохранённые настройки. Введите их заново."</string>
+    <string name="bot_token" formatted="false">"Токен бота"</string>
+    <string name="token_from_botfather" formatted="false">"Токен от @BotFather"</string>
+    <string name="saved_enter_to_replace" formatted="false">"Сохранён · введите для замены"</string>
+    <string name="recipient_chat" formatted="false">"Чат получателя"</string>
+    <string name="chat_id_or_channel" formatted="false">"ID чата или @имя канала"</string>
+    <string name="telegram_bot" formatted="false">"Бот Telegram"</string>
+    <string name="disconnect" formatted="false">"Отключить"</string>
+    <string name="bot_settings_removed" formatted="false">"Настройки бота удалены"</string>
+    <string name="enter_the_complete_token_from_botfather" formatted="false">"Вставьте целиком токен от @BotFather"</string>
+    <string name="enter_a_numeric_chat_id_or_channel" formatted="false">"Введите числовой ID чата или @имя канала"</string>
+    <string name="could_not_save_settings_on_this_phone" formatted="false">"Не удалось сохранить настройки на телефоне"</string>
+    <string name="bot_settings_saved" formatted="false">"Настройки бота сохранены"</string>
+    <string name="n_nan_m4a_copy_will_be_sent" formatted="false">"\n\nДля отправки будет создана копия M4A. Исходный WAV останется в архиве."</string>
+    <string name="send_clip" formatted="false">"Отправить клип?"</string>
+    <string name="n_ntelegram_chat" formatted="false">"\n\nЧат Telegram: "</string>
+    <string name="send" formatted="false">"Отправить"</string>
+    <string name="opening_clip" formatted="false">"Открываем клип…"</string>
+    <string name="clip_delivered_to_chat" formatted="false">"Клип доставлен в чат "</string>
+    <string name="send_to_telegram" formatted="false">"Отправка в Telegram"</string>
+    <string name="minimize" formatted="false">"Свернуть"</string>
+    <string name="sending_wav_to_telegram" formatted="false">"Отправляем WAV в Telegram…"</string>
+    <string name="preparing_an_m4a_copy_for_telegram" formatted="false">"Готовим копию M4A для Telegram…"</string>
+    <string name="could_not_open_this_clip_check_the" formatted="false">"Не удалось открыть выбранный клип. Проверьте, есть ли он в архиве."</string>
+    <string name="could_not_prepare_audio_check_storage_or" formatted="false">"Не удалось подготовить аудиофайл. Проверьте свободное место или отправьте WAV через «Поделиться»."</string>
+    <string name="preparing_m4a_copy" formatted="false">"Готовим копию M4A · "</string>
+    <string name="sending_m4a_to_telegram" formatted="false">"Отправляем M4A в Telegram…"</string>
+    <string name="check_the_chat_id_and_tap_start" formatted="false">"Проверьте ID чата и откройте чат с ботом кнопкой «Старт»."</string>
+    <string name="telegram_rejected_the_token_check_bot_settings" formatted="false">"Telegram отклонил токен. Проверьте его в настройках бота."</string>
+    <string name="the_bot_cannot_post_in_this_chat" formatted="false">"Боту запрещено писать в этот чат. Проверьте блокировку или права в группе."</string>
+    <string name="telegram_rejected_the_file_size_choose_a" formatted="false">"Telegram отклонил размер файла. Выберите клип короче."</string>
+    <string name="telegram_is_rate_limiting_requests_try_again" formatted="false">"Telegram ограничил частоту запросов. Попробуйте позже."</string>
+    <string name="telegram_did_not_confirm_delivery_http" formatted="false">"Telegram не подтвердил доставку (HTTP "</string>
+    <string name="check_the_chat" formatted="false">"). Проверьте чат."</string>
+    <string name="delivery_unconfirmed_check_your_connection_and_chat" formatted="false">"Не удалось подтвердить доставку. Проверьте сеть и чат перед повторной отправкой."</string>
+    <string name="archive_alt" formatted="false">"‹   Архив"</string>
+    <string name="trim_replay" formatted="false">"Обрезка повтора"</string>
+    <string name="go_to_marker" formatted="false">"Перейти к метке  ·  "</string>
+    <string name="play_selection" formatted="false">"Слушать выделенное"</string>
+    <string name="send_selection" formatted="false">"Отправить выделенное…"</string>
+    <string name="the_trimmed_section_is_saved_as_a" formatted="false">"Обрезанный фрагмент сохранится отдельным WAV в архиве. Для отправки всей записи используется оригинал."</string>
+    <string name="could_not_read_waveform" formatted="false">"Не удалось прочитать звуковую волну"</string>
+    <string name="start" formatted="false">"Начало"</string>
+    <string name="end" formatted="false">"Конец"</string>
+    <string name="earlier_by_0_1_seconds" formatted="false">" на 0,1 секунды раньше"</string>
+    <string name="later_by_0_1_seconds" formatted="false">" на 0,1 секунды позже"</string>
+    <string name="of_selection" formatted="false">" фрагмента"</string>
+    <string name="marker" formatted="false">"Метка "</string>
+    <string name="choose_a_moment" formatted="false">"Выбрать момент"</string>
+    <string name="start_alt" formatted="false">"Начало   "</string>
+    <string name="end_alt" formatted="false">"Конец   "</string>
+    <string name="selected_alt" formatted="false">"Выделено "</string>
+    <string name="could_not_play_recording" formatted="false">"Не удалось воспроизвести запись"</string>
+    <string name="where_should_the_selection_go" formatted="false">"Куда отправить фрагмент?"</string>
+    <string name="telegram_bot_alt" formatted="false">"Telegram-бот"</string>
+    <string name="share_via" formatted="false">"Поделиться через…"</string>
+    <string name="preparing_wav" formatted="false">"Подготовка WAV…"</string>
+    <string name="could_not_write_selection_check_free_storage" formatted="false">"Не удалось записать фрагмент. Проверьте свободное место."</string>
+    <string name="selection_saved_in_archive" formatted="false">"Фрагмент сохранён в архиве"</string>
+    <string name="send_selection_alt" formatted="false">"Отправить фрагмент"</string>
+    <string name="language" formatted="false">"Язык"</string>
+    <string name="widget_archive_link" formatted="false">"Архив ↗"</string>
+</resources>

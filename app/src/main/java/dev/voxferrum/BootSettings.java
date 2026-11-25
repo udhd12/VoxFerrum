@@ -22,7 +22,7 @@ final class BootSettings extends LinearLayout {
         setOrientation(VERTICAL);
         BootReminder.channel(screen);
         toggle=new Switch(screen);
-        toggle.setText("Запуск после включения телефона");
+        toggle.setText(Lang.text(R.string.start_after_power_on));
         toggle.setTextColor(screen.skin.ink);
         toggle.setTextSize(17);
         toggle.setMinHeight(screen.dp(48));
@@ -30,7 +30,7 @@ final class BootSettings extends LinearLayout {
         addView(toggle);
         detail=screen.text("",14,screen.skin.muted,null);
         addView(detail);
-        notifications=screen.button("Разрешить уведомления",false,v->fixNotifications());
+        notifications=screen.button(Lang.text(R.string.allow_notifications),false,v->fixNotifications());
         addView(notifications);
         toggle.setOnCheckedChangeListener((button,on)->{
             BootReminder.setEnabled(screen,on);
@@ -42,9 +42,9 @@ final class BootSettings extends LinearLayout {
     void refresh(){
         boolean enabled=BootReminder.enabled(screen);
         boolean allowed=enabled && BootReminder.canNotify(screen);
-        detail.setText(!enabled ? "После перезагрузки повтор запускается вручную." :
-                allowed ? "После первой разблокировки нажмите «Включить повтор» в уведомлении. Для звука приложений Android попросит подтвердить захват."
-                        : "Уведомления отключены. При первом открытии Vox Ferrum после загрузки запустится выбранный режим.");
+        detail.setText(!enabled ? Lang.text(R.string.start_replay_manually_after_a_restart) :
+                allowed ? Lang.text(R.string.after_unlocking_tap_enable_replay_in_the)
+                        : Lang.text(R.string.notifications_are_off_open_vox_ferrum_after));
         notifications.setVisibility(enabled && !allowed ? View.VISIBLE : View.GONE);
     }
     private void fixNotifications(){

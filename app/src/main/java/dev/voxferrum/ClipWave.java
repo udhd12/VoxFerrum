@@ -20,11 +20,11 @@ final class ClipWave extends View {
     private boolean dragStart;
     ClipWave(Context c,Skin theme,int ms,List<Integer> marks,Change change){
         super(c); skin=theme; duration=Math.max(ms,1); this.marks=marks; this.change=change;
-        to=duration; setContentDescription("Звуковая волна и метки. Для точного выбора используйте ползунки ниже.");
+        to=duration; setContentDescription(Lang.text(R.string.waveform_and_markers_use_the_sliders_below));
     }
     static float[] read(Context c,android.net.Uri uri) throws IOException {
         try(InputStream raw=c.getContentResolver().openInputStream(uri)){
-            if(raw==null) throw new IOException("Файл недоступен");
+            if(raw==null) throw new IOException(Lang.text(R.string.file_unavailable));
             DataInputStream in=new DataInputStream(new BufferedInputStream(raw));
             long bytes=TelegramAudio.readHeader(in);
             float[] values=new float[512]; byte[] chunk=new byte[65536]; long offset=0;

@@ -35,21 +35,20 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
         main.removeCallbacks(resetWidgetMessage);
         main.postDelayed(resetWidgetMessage, 2300);
     }
-    static final String SILENCE_MESSAGE = "Уже 12 секунд без звука. Проверьте воспроизведение и разрешает ли игра захват.";
+    static String SILENCE_MESSAGE() { return Lang.text(R.string.no_sound_for_12_seconds_check_playback); }
     public static volatile String sessionSource = "playback";
     static volatile long restoreId;
-    static final String MIC_CONTINUES = "Звук приложений отключён. Микрофон продолжает запись.";
 
     public static String silenceMessage() {
         switch (sessionSource) {
-            case "mic": return "Уже 12 секунд без звука. Проверьте микрофон и его системный выключатель.";
-            case "mix": return "Уже 12 секунд без звука. Проверьте микрофон и воспроизведение в приложении.";
-            default: return SILENCE_MESSAGE;
+            case "mic": return Lang.text(R.string.no_sound_for_12_seconds_check_the);
+            case "mix": return Lang.text(R.string.no_sound_for_12_seconds_check_the_alt);
+            default: return SILENCE_MESSAGE();
         }
     }
 
     static final String MARK = "mark";
-    public static volatile String status = "Буфер выключен";
+    public static volatile int status = R.string.buffer_off;
     static final String START = "start", SAVE = "save", STOP = "stop";
     private static final String CHANNEL = "vox_capture";
     private static final int NOTIFICATION = 72;
@@ -99,7 +98,7 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
         prefs = getSharedPreferences("vox", MODE_PRIVATE);
         prefs.registerOnSharedPreferenceChangeListener(this);
         getSystemService(NotificationManager.class).createNotificationChannel(
-                new NotificationChannel(CHANNEL, "Аудиоповтор", NotificationManager.IMPORTANCE_LOW));
+                new NotificationChannel(CHANNEL, Lang.text(R.string.audio_replay), NotificationManager.IMPORTANCE_LOW));
     }
 
     @Override public int onStartCommand(Intent intent, int flags, int startId) {
@@ -116,11 +115,11 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
             if (session.audio.mark()) {
                 markedAt = android.os.SystemClock.elapsedRealtime();
                 brieflyUpdateWidget();
-                status = "Метка добавлена";
+                status = R.string.marker_added;
                 changed();
             }
         } else if (STOP.equals(action)) {
-            end("Буфер выключен");
+            end(R.string.buffer_off);
         } else if (session == null && !saving) {
             stopSelf();
         }
@@ -144,7 +143,7 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
             CaptureInputs ready = inputs;
             next.inputs = ready;
             running = true;
-            status = "Буфер включён";
+            status = R.string.buffer_active;
             new Thread(() -> read(next, ready), "vox-audio").start();
             inputs = null; // The reader now owns release.
             BootReminder.clear(this);
@@ -154,12 +153,12 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
                 next.inputs = null;
                 inputs.close();
             }
-            String failure;
-            if (e instanceof SecurityException) failure = "Android не разрешил захват. Проверьте разрешения и повторите.";
-            else if (e instanceof CaptureInputs.MicUnavailable) failure = "Не удалось открыть микрофон. Проверьте подключение гарнитуры и доступ к микрофону в настройках Android.";
-            else if ("mix".equals(sessionSource)) failure = "Не удалось открыть оба источника. Выберите один источник на вкладке «Повтор».";
-            else if ("mic".equals(sessionSource)) failure = "Не удалось открыть микрофон. Проверьте, доступен ли он.";
-            else failure = "Не удалось открыть системный звук. Запустите буфер снова.";
+            int failure;
+            if (e instanceof SecurityException) failure = R.string.android_denied_capture_check_permissions_and_try;
+            else if (e instanceof CaptureInputs.MicUnavailable) failure = R.string.could_not_open_the_microphone_check_the;
+            else if ("mix".equals(sessionSource)) failure = R.string.could_not_open_both_sources_choose_one;
+            else if ("mic".equals(sessionSource)) failure = R.string.could_not_open_the_microphone_check_that;
+            else failure = R.string.could_not_open_app_audio_start_replay;
             end(failure);
         }
     }
@@ -182,11 +181,11 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
             current.inputs.attachPlayback(current.projection, playbackError(current));
             restoreId = 0;
             sessionSource = "mix";
-            status = "Буфер включён";
+            status = R.string.buffer_active;
         } catch (RuntimeException unavailable) {
             releaseProjection(current);
             updateForeground(false, true);
-            status = "Не удалось вернуть звук приложений. Микрофон продолжает запись.";
+            status = R.string.could_not_restore_app_audio_microphone_recording;
         }
         changed();
     }
@@ -199,14 +198,14 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
     private void projectionLost(Session current, MediaProjection projection) {
         if (session != current || current.projection != projection || projection == null) return;
         if (!"mix".equals(sessionSource)) {
-            end("Android завершил захват. Запустите буфер снова.");
+            end(R.string.android_ended_capture_start_replay_again);
             return;
         }
         current.inputs.detachPlayback();
         releaseProjection(current);
         sessionSource = "mic";
         restoreId = android.os.SystemClock.elapsedRealtimeNanos();
-        status = MIC_CONTINUES;
+        status = R.string.app_audio_disconnected_microphone_recording_continues;
         updateForeground(false, true);
         changed();
     }
@@ -261,7 +260,7 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
                 }
                 String warning = !policyWarning.isEmpty() ? policyWarning :
                         quietMicFrames >= 5L * RollingAudio.RATE
-                                ? "Микрофон не даёт заметного сигнала. Скажите несколько слов и проверьте выбранный вход." : "";
+                                ? Lang.text(R.string.no_microphone_signal_detected_speak_and_check) : "";
                 if (nowSilent != wasSilent || !warning.equals(previousMicWarning)) {
                     wasSilent = nowSilent;
                     previousMicWarning = warning;
@@ -281,11 +280,11 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
             }
         } catch (IOException e) {
             main.post(() -> {
-                if (session == current) end("Не удалось записать буфер. Проверьте свободное место на телефоне.");
+                if (session == current) end(R.string.could_not_write_the_buffer_check_free);
             });
         } catch (RuntimeException e) {
             main.post(() -> {
-                if (session == current) end("Захват звука прервался. Запустите буфер снова.");
+                if (session == current) end(R.string.audio_capture_interrupted_start_replay_again);
             });
         } finally {
             current.audio.close();
@@ -301,13 +300,13 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
         if (saving) return;
         RollingAudio.Snapshot snapshot = session.audio.last(seconds());
         if (snapshot.samples == 0) {
-            status = "Буфер пока пуст";
+            status = R.string.buffer_is_empty;
             changed();
             return;
         }
         int gain = Math.max(0, Math.min(18, prefs.getInt("gainDb", 0)));
         saving = true;
-        status = "Сохраняется повтор…";
+        status = R.string.saving_replay;
         changed();
         new Thread(() -> {
             boolean success = false;
@@ -317,7 +316,7 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
             } catch (RuntimeException | IOException ignored) {
                 // Report a local, actionable error without exposing paths.
             }
-            final String result = success ? "Повтор сохранён в Music/VoxFerrum" : "Не удалось сохранить WAV. Проверьте свободное место.";
+            final int result = success ? R.string.replay_saved_to_music_voxferrum : R.string.could_not_save_wav_check_free_storage;
             final boolean didSave = success;
             main.post(() -> {
                 if (didSave) {
@@ -335,7 +334,7 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
         }, "vox-export").start();
     }
 
-    private void end(String message) {
+    private void end(int message) {
         releaseSession();
         status = message;
         changed();
@@ -379,18 +378,18 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
         String warning = !micWarning.isEmpty() ? micWarning : silent ? silenceMessage() : "";
         Notification.Builder note = new Notification.Builder(this, CHANNEL)
                 .setSmallIcon(R.drawable.ic_wave)
-                .setContentTitle("Vox Ferrum · " + (restoreId != 0 ? "только микрофон" : "mic".equals(sessionSource) ? "микрофон"
-                        : "mix".equals(sessionSource) ? "приложения + микрофон" : "звук приложений"))
-                .setContentText(saving ? "Сохранение WAV…" : warning.isEmpty() ? status : warning)
+                .setContentTitle("Vox Ferrum · " + (restoreId != 0 ? Lang.text(R.string.microphone_only) : "mic".equals(sessionSource) ? Lang.text(R.string.microphone_alt)
+                        : "mix".equals(sessionSource) ? Lang.text(R.string.apps_microphone_alt) : Lang.text(R.string.app_audio_alt)))
+                .setContentText(saving ? Lang.text(R.string.saving_wav) : warning.isEmpty() ? Lang.text(status) : warning)
                 .setShowWhen(false).setOnlyAlertOnce(true).setOngoing(true);
         if (launch != null) note.setContentIntent(PendingIntent.getActivity(this, 0, launch, PendingIntent.FLAG_IMMUTABLE));
         if (!warning.isEmpty() && !saving) note.setStyle(new Notification.BigTextStyle().bigText(warning));
         if (session != null) {
             int length = seconds();
-            String duration = length % 60 == 0 ? (length / 60) + " мин" : length + " с";
-            if (!saving) note.addAction(new Notification.Action.Builder(null, "Сохранить " + duration, action(SAVE)).build());
-            note.addAction(new Notification.Action.Builder(null, "Метка", action(MARK)).build());
-            note.addAction(new Notification.Action.Builder(null, "Остановить", action(STOP)).build());
+            String duration = length % 60 == 0 ? (length / 60) + Lang.text(R.string.min) : length + Lang.text(R.string.s);
+            if (!saving) note.addAction(new Notification.Action.Builder(null, Lang.text(R.string.save) + duration, action(SAVE)).build());
+            note.addAction(new Notification.Action.Builder(null, Lang.text(R.string.mark), action(MARK)).build());
+            note.addAction(new Notification.Action.Builder(null, Lang.text(R.string.stop_recording), action(STOP)).build());
         }
         if (android.os.Build.VERSION.SDK_INT >= 31) {
             note.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
@@ -409,7 +408,7 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
     }
 
     @Override public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-        if (foreground && "seconds".equals(key)) changed();
+        if (foreground && ("seconds".equals(key) || "english".equals(key))) changed();
     }
 
     @Override public void onDestroy() {

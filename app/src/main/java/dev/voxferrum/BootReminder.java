@@ -40,8 +40,8 @@ public final class BootReminder extends BroadcastReceiver {
         NotificationManager manager=c.getSystemService(NotificationManager.class);
         NotificationChannel channel=manager.getNotificationChannel(CHANNEL);
         if (channel==null) {
-            channel=new NotificationChannel(CHANNEL,"После включения телефона",NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("Предложение включить аудиоповтор после разблокировки");
+            channel=new NotificationChannel(CHANNEL,Lang.text(R.string.after_power_on),NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(Lang.text(R.string.prompt_to_start_audio_replay_after_unlocking));
             manager.createNotificationChannel(channel);
         }
         return channel;
@@ -62,13 +62,13 @@ public final class BootReminder extends BroadcastReceiver {
         PendingIntent dismiss=PendingIntent.getBroadcast(c,ID,new Intent(c,BootReminder.class)
                 .setAction(DISMISS),PendingIntent.FLAG_IMMUTABLE);
         String source=prefs(c).getString("audioSource","playback");
-        String message="mic".equals(source) ? "Телефон включён. Нажмите, чтобы запустить буфер микрофона."
-                : "Телефон включён. Нажмите и подтвердите захват звука приложений.";
+        String message="mic".equals(source) ? Lang.text(R.string.phone_restarted_tap_to_start_the_microphone)
+                : Lang.text(R.string.phone_restarted_tap_to_approve_app_audio);
         Notification note=new Notification.Builder(c,CHANNEL)
-                .setSmallIcon(R.drawable.ic_wave).setContentTitle("Включить аудиоповтор?")
+                .setSmallIcon(R.drawable.ic_wave).setContentTitle(Lang.text(R.string.start_audio_replay))
                 .setContentText(message).setStyle(new Notification.BigTextStyle().bigText(message))
                 .setContentIntent(start).setDeleteIntent(dismiss).setOnlyAlertOnce(true)
-                .addAction(new Notification.Action.Builder(null,"Включить повтор",start).build()).build();
+                .addAction(new Notification.Action.Builder(null,Lang.text(R.string.enable_replay),start).build()).build();
         c.getSystemService(NotificationManager.class).notify(ID,note);
     }
 }

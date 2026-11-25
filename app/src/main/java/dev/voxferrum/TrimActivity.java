@@ -47,26 +47,26 @@ public class TrimActivity extends Activity {
         });
         page=new LinearLayout(this);page.setOrientation(LinearLayout.VERTICAL);page.setPadding(dp(18),dp(12),dp(18),dp(18));
         scroll.addView(page);setContentView(scroll);
-        page.addView(button("‹   Архив",false,v->finish()));
-        TextView title=label("Обрезка повтора",27); title.setTypeface(skin.display); page.addView(title);
+        page.addView(button(Lang.text(R.string.archive_alt),false,v->finish()));
+        TextView title=label(Lang.text(R.string.trim_replay),27); title.setTypeface(skin.display); page.addView(title);
         readout=label("",15);page.addView(readout);
         wave=new ClipWave(this,skin,source.durationMs,marks,this::boundary);
         page.addView(wave,-1,dp(110));
         if(!marks.isEmpty()){
-            page.addView(button("Перейти к метке  ·  "+marks.size(),false,v->chooseMark()));
+            page.addView(button(Lang.text(R.string.go_to_marker)+marks.size(),false,v->chooseMark()));
         }
         startLabel=label("",17);page.addView(startLabel);startSlider=slider(true);
         endLabel=label("",17);page.addView(endLabel);endSlider=slider(false);
-        listen=button("Слушать выделенное",false,v->{if(player!=null) stop();else preview();});page.addView(listen);
-        send=button("Отправить выделенное…",true,v->chooseDestination());page.addView(send);
-        page.addView(label("Обрезанный фрагмент сохранится отдельным WAV в архиве. Для отправки всей записи используется оригинал.",14));
+        listen=button(Lang.text(R.string.play_selection),false,v->{if(player!=null) stop();else preview();});page.addView(listen);
+        send=button(Lang.text(R.string.send_selection),true,v->chooseDestination());page.addView(send);
+        page.addView(label(Lang.text(R.string.the_trimmed_section_is_saved_as_a),14));
         update();
         io.execute(()->{
             try{
                 float[] peaks=ClipWave.read(getApplicationContext(),source.uri);
                 main.post(()->{if(!isDestroyed()) wave.setPeaks(peaks);});
             }catch(IOException|RuntimeException e){
-                main.post(()->{if(!isDestroyed()) toast("Не удалось прочитать звуковую волну");});
+                main.post(()->{if(!isDestroyed()) toast(Lang.text(R.string.could_not_read_waveform));});
             }
         });
     }
@@ -83,9 +83,9 @@ public class TrimActivity extends Activity {
         LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);
         Button minus=button("−",false,v->boundary(first,(first?from:to)-100));
         Button plus=button("+",false,v->boundary(first,(first?from:to)+100));
-        String which=first?"Начало":"Конец";
-        minus.setContentDescription(which+" на 0,1 секунды раньше"); plus.setContentDescription(which+" на 0,1 секунды позже");
-        SeekBar bar=new SeekBar(this);bar.setMax(source.durationMs);bar.setContentDescription(which+" фрагмента");
+        String which=first?Lang.text(R.string.start):Lang.text(R.string.end);
+        minus.setContentDescription(which+Lang.text(R.string.earlier_by_0_1_seconds)); plus.setContentDescription(which+Lang.text(R.string.later_by_0_1_seconds));
+        SeekBar bar=new SeekBar(this);bar.setMax(source.durationMs);bar.setContentDescription(which+Lang.text(R.string.of_selection));
         bar.setThumbTintList(ColorStateList.valueOf(skin.accent));bar.setProgressTintList(ColorStateList.valueOf(skin.accent));
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             public void onStartTrackingTouch(SeekBar b){}
@@ -100,8 +100,8 @@ public class TrimActivity extends Activity {
     }
     private void chooseMark(){
         String[] options=new String[marks.size()];
-        for(int i=0;i<options.length;i++) options[i]="Метка "+(i+1)+"   ·   "+time(marks.get(i));
-        new AlertDialog.Builder(this).setTitle("Выбрать момент").setItems(options,(d,i)->{
+        for(int i=0;i<options.length;i++) options[i]=Lang.text(R.string.marker)+(i+1)+"   ·   "+time(marks.get(i));
+        new VoxMenu(this).setTitle(Lang.text(R.string.choose_a_moment)).setItems(options,(d,i)->{
             if(working)return;
             stop();int at=marks.get(i);from=Math.max(0,at-5000);to=Math.min(source.durationMs,at+5000);update();
         }).show();
@@ -113,17 +113,17 @@ public class TrimActivity extends Activity {
         update();
     }
     private void update(){
-        startLabel.setText("Начало   "+time(from));endLabel.setText("Конец   "+time(to));
+        startLabel.setText(Lang.text(R.string.start_alt)+time(from));endLabel.setText(Lang.text(R.string.end_alt)+time(to));
         startSlider.setProgress(from);endSlider.setProgress(to);wave.range(from,to);
-        readout.setText("Выделено "+time(to-from)+" из "+time(source.durationMs));
+        readout.setText(Lang.text(R.string.selected_alt)+time(to-from)+Lang.text(R.string.of)+time(source.durationMs));
     }
     private void preview(){
-        stop();MediaPlayer p=new MediaPlayer();player=p;listen.setText("Стоп");
+        stop();MediaPlayer p=new MediaPlayer();player=p;listen.setText(Lang.text(R.string.stop));
         try {
             p.setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
                 .setAllowedCapturePolicy(AudioAttributes.ALLOW_CAPTURE_BY_NONE).build());
             p.setDataSource(this,source.uri);
-            p.setOnErrorListener((mp,w,e)->{if(player==mp){stop();toast("Не удалось воспроизвести запись");}return true;});
+            p.setOnErrorListener((mp,w,e)->{if(player==mp){stop();toast(Lang.text(R.string.could_not_play_recording));}return true;});
             p.setOnCompletionListener(mp->{if(player==mp)stop();});
             p.setOnPreparedListener(mp->{
                 if(player!=mp)return;
@@ -131,7 +131,7 @@ public class TrimActivity extends Activity {
             });
             p.setOnSeekCompleteListener(mp->{if(player==mp)startPreview(mp);});
             p.prepareAsync();
-        }catch(IOException|RuntimeException e){stop();toast("Файл недоступен");}
+        }catch(IOException|RuntimeException e){stop();toast(Lang.text(R.string.file_unavailable));}
     }
     private void startPreview(MediaPlayer p){
         p.start();main.post(tick);
@@ -145,11 +145,11 @@ public class TrimActivity extends Activity {
         main.removeCallbacks(tick);
         if(player!=null){player.release();player=null;}
         if(wave!=null)wave.cursor(-1);
-        if(listen!=null)listen.setText("Слушать выделенное");
+        if(listen!=null)listen.setText(Lang.text(R.string.play_selection));
     }
     private void chooseDestination(){
-        new AlertDialog.Builder(this).setTitle("Куда отправить фрагмент?")
-            .setItems(new String[]{"Telegram-бот","Поделиться через…"},(d,i)->export(i==0)).show();
+        new VoxMenu(this).setTitle(Lang.text(R.string.where_should_the_selection_go))
+            .setItems(new String[]{Lang.text(R.string.telegram_bot_alt),Lang.text(R.string.share_via)},(d,i)->export(i==0)).show();
     }
     private void export(boolean bot){
         if(working)return;
@@ -157,17 +157,17 @@ public class TrimActivity extends Activity {
         if(from==0 && to==source.durationMs){deliver(source,bot);return;}
         if(cut!=null && cutStart==from && cutEnd==to){deliver(cut,bot);return;}
         final int a=from,b=to;
-        working=true;send.setEnabled(false);listen.setEnabled(false);send.setText("Подготовка WAV…");
+        working=true;send.setEnabled(false);listen.setEnabled(false);send.setText(Lang.text(R.string.preparing_wav));
         io.execute(()->{
             Clips.Clip result=null;
             try{result=Clips.extract(getApplicationContext(),source,a,b);}catch(IOException|RuntimeException ignored){}
             final Clips.Clip ready=result;
             main.post(()->{
                 if(isDestroyed()||isFinishing())return;
-                working=false;send.setText("Отправить выделенное…");send.setEnabled(true);listen.setEnabled(true);
-                if(ready==null){toast("Не удалось записать фрагмент. Проверьте свободное место.");return;}
+                working=false;send.setText(Lang.text(R.string.send_selection));send.setEnabled(true);listen.setEnabled(true);
+                if(ready==null){toast(Lang.text(R.string.could_not_write_selection_check_free_storage));return;}
                 cut=ready;cutStart=a;cutEnd=b;
-                if(visible)deliver(ready,bot);else toast("Фрагмент сохранён в архиве");
+                if(visible)deliver(ready,bot);else toast(Lang.text(R.string.selection_saved_in_archive));
             });
         });
     }
@@ -176,7 +176,7 @@ public class TrimActivity extends Activity {
         Intent i=new Intent(Intent.ACTION_SEND).setType("audio/wav").putExtra(Intent.EXTRA_STREAM,clip.uri)
              .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         i.setClipData(ClipData.newUri(getContentResolver(),clip.name,clip.uri));
-        startActivity(Intent.createChooser(i,"Отправить фрагмент"));
+        startActivity(Intent.createChooser(i,Lang.text(R.string.send_selection_alt)));
     }
     private void toast(String s){Toast.makeText(this,s,Toast.LENGTH_LONG).show();}
     @Override protected void onStart(){super.onStart();visible=true;}

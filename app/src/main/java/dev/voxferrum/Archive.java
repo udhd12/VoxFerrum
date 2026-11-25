@@ -40,7 +40,7 @@ final class Archive {
     private boolean closed;
     private MediaPlayer player;
     private Uri listening;
-    private final SimpleDateFormat stamp = new SimpleDateFormat("d MMMM, HH:mm:ss", new Locale("ru"));
+    private final SimpleDateFormat stamp = new SimpleDateFormat("d MMMM, HH:mm:ss", Lang.locale());
     private final Runnable reload = this::refresh;
     private final ContentObserver changes = new ContentObserver(main) {
         @Override public void onChange(boolean self) {
@@ -50,16 +50,16 @@ final class Archive {
 
     Archive(MainActivity screen, LinearLayout box) {
         this.screen = screen; skin = screen.skin;
-        box.addView(screen.text("Архив",29,skin.ink,skin.display));
+        box.addView(screen.text(Lang.text(R.string.archive),29,skin.ink,skin.display));
         screen.space(box,5);
         totals=screen.text("Music / VoxFerrum",13,skin.accent,skin.mono); box.addView(totals);
         screen.space(box,8);
         LinearLayout tools=screen.row();
-        filter=screen.button("Избранное",false,v -> {favoritesOnly=!favoritesOnly; display();});
+        filter=screen.button(Lang.text(R.string.favorites),false,v -> {favoritesOnly=!favoritesOnly; display();});
         tools.addView(filter,screen.grow()); screen.gap(tools,6);
-        tools.addView(screen.button("Очистка…",false,v -> cleanup()),screen.grow()); box.addView(tools);
+        tools.addView(screen.button(Lang.text(R.string.clean_up),false,v -> cleanup()),screen.grow()); box.addView(tools);
         screen.space(box,15);
-        status = screen.text("Загружаем клипы…",16,skin.muted,null);
+        status = screen.text(Lang.text(R.string.loading_clips),16,skin.muted,null);
         box.addView(status);
         list = new ListView(screen); list.setDivider(null); list.setDividerHeight(screen.dp(10));
         list.setItemsCanFocus(true); list.setCacheColorHint(0);
@@ -79,7 +79,7 @@ final class Archive {
                 });
             } catch (RuntimeException error) {
                 main.post(() -> {
-                    if (!closed) { status.setText("Не удалось прочитать архив. Проверьте доступность хранилища.");
+                    if (!closed) { status.setText(Lang.text(R.string.could_not_read_the_archive_check_that));
                         status.setVisibility(View.VISIBLE); }
                 });
             }
@@ -94,19 +94,19 @@ final class Archive {
             if(!favoritesOnly || ClipNotes.favorite(screen,c.uri)) shown.add(c);
         }
         visibleClips=shown;
-        totals.setText(String.format(new Locale("ru"),"Записей: %d   ·   %.1f МБ",clips.size(),bytes/1e6));
-        filter.setSelected(favoritesOnly); filter.setText(favoritesOnly?"Показать все":"Избранное");
-        status.setText(favoritesOnly?"Избранных записей пока нет.":"Пока пусто. Включите повтор и сохраните фрагмент.");
+        totals.setText(String.format(Lang.locale(),Lang.text(R.string.d_clips_1f_mb),clips.size(),bytes/1e6));
+        filter.setSelected(favoritesOnly); filter.setText(favoritesOnly?Lang.text(R.string.show_all):Lang.text(R.string.favorites));
+        status.setText(favoritesOnly?Lang.text(R.string.no_favorites_yet):Lang.text(R.string.no_clips_yet_start_replay_and_save));
         status.setVisibility(shown.isEmpty()?View.VISIBLE:View.GONE);
         adapter.notifyDataSetChanged();
     }
 
     private void cleanup(){
         if(deleting) return;
-        String[] choices={"Старше 7 дней","Старше 30 дней","Старше 90 дней"};
-        new android.app.AlertDialog.Builder(screen).setTitle("Очистить архив")
+        String[] choices={Lang.text(R.string.older_than_7_days),Lang.text(R.string.older_than_30_days),Lang.text(R.string.older_than_90_days)};
+        new VoxMenu(screen).setTitle(Lang.text(R.string.clean_up_archive))
             .setItems(choices,(d,i)->confirmCleanup(new int[]{7,30,90}[i]))
-            .setNegativeButton("Отмена",null).show();
+            .setNegativeButton(Lang.text(R.string.cancel),null).show();
     }
     private void confirmCleanup(int days){
         long cutoff=System.currentTimeMillis()-days*86400000L;
@@ -116,11 +116,11 @@ final class Archive {
             candidates.add(c); bytes+=c.bytes;
         }
         if(candidates.isEmpty()){
-            Toast.makeText(screen,"Нет записей под выбранный срок вне избранного",Toast.LENGTH_LONG).show(); return;
+            Toast.makeText(screen,Lang.text(R.string.no_clips_outside_favorites_match_this_age),Toast.LENGTH_LONG).show(); return;
         }
-        String detail=String.format(new Locale("ru"),"Записей старше %d дней: %d (%.1f МБ). Избранное сохранится.",days,candidates.size(),bytes/1e6);
-        new android.app.AlertDialog.Builder(screen).setTitle("Удалить старые записи?")
-            .setMessage(detail).setNegativeButton("Отмена",null).setPositiveButton("Удалить",(d,w)->{
+        String detail=String.format(Lang.locale(),Lang.text(R.string.clips_older_than_d_days_d_1f),days,candidates.size(),bytes/1e6);
+        new VoxMenu(screen).setTitle(Lang.text(R.string.delete_old_recordings))
+            .setMessage(detail).setNegativeButton(Lang.text(R.string.cancel),null).setPositiveButton(Lang.text(R.string.delete),(d,w)->{
                 deleting=true; endPlayback(); io.execute(()->{
                     int removed=0;
                     for(Clips.Clip c:candidates){
@@ -133,7 +133,7 @@ final class Archive {
                     }
                     final int count=removed;
                     main.post(()->{deleting=false;if(!closed){
-                        Toast.makeText(screen,"Удалено: "+count+" из "+candidates.size(),Toast.LENGTH_LONG).show(); refresh();
+                        Toast.makeText(screen,Lang.text(R.string.deleted)+count+Lang.text(R.string.of)+candidates.size(),Toast.LENGTH_LONG).show(); refresh();
                     }});
                 });
             }).show();
@@ -147,32 +147,32 @@ final class Archive {
             LinearLayout card = screen.plate();
             card.addView(screen.text(stamp.format(new Date(clip.dateMs)),20,skin.ink,skin.display));
             screen.space(card,5);
-            Locale locale = new Locale("ru");
+            Locale locale = Lang.locale();
             String duration = clip.durationMs >= 60000
                     ? String.format(locale, "%d:%02d", clip.durationMs / 60000, (clip.durationMs / 1000) % 60)
-                    : String.format(locale, "%.1f с", clip.durationMs / 1000.0);
-            String meta = String.format(locale, "WAV   ·   %s   ·   %.1f МБ", duration, clip.bytes / 1000000.0);
+                    : String.format(locale, Lang.text(R.string.label_1f_s), clip.durationMs / 1000.0);
+            String meta = String.format(locale, Lang.text(R.string.wav_s_1f_mb), duration, clip.bytes / 1000000.0);
             card.addView(screen.text(meta,13,skin.muted,skin.mono));
             screen.space(card,12);
             LinearLayout actions = screen.row();
             boolean selected = clip.uri.equals(listening);
-            actions.addView(screen.button(selected ? "Стоп" : "Слушать",false,v -> play(clip)),screen.grow());
+            actions.addView(screen.button(selected ? Lang.text(R.string.stop) : Lang.text(R.string.play),false,v -> play(clip)),screen.grow());
             screen.gap(actions,6);
             actions.addView(screen.button("Telegram",false,v -> Telegram.send(screen,clip.uri,clip.name,clip.bytes)),screen.grow());
             screen.gap(actions,6);
             Button share = screen.button("↗",false,v -> share(clip)); share.setTextSize(20);
-            share.setContentDescription("Поделиться файлом " + clip.name);
+            share.setContentDescription(Lang.text(R.string.share_file) + clip.name);
             actions.addView(share,screen.dp(48),MainActivity.WRAP);
             card.addView(actions); screen.space(card,6);
             LinearLayout edit=screen.row();
-            edit.addView(screen.button("Обрезать",false,v -> {
+            edit.addView(screen.button(Lang.text(R.string.trim),false,v -> {
                 endPlayback();
                 screen.startActivity(new Intent(screen,TrimActivity.class).setData(clip.uri)
                         .putExtra("name",clip.name).putExtra("bytes",clip.bytes));
             }),screen.grow());
             screen.gap(edit,6);
             boolean fav=ClipNotes.favorite(screen,clip.uri);
-            Button seal=screen.button(fav?"⚙ В избранном":"⚙ В избранное",fav,v -> {
+            Button seal=screen.button(fav?Lang.text(R.string.favorited):Lang.text(R.string.favorite),fav,v -> {
                 if(deleting) return;
                 ClipNotes.favorite(screen,clip.uri,!fav); display();
             });
@@ -186,9 +186,9 @@ final class Archive {
                 .putExtra(Intent.EXTRA_STREAM,clip.uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         send.setClipData(ClipData.newUri(screen.getContentResolver(),clip.name,clip.uri));
-        try { screen.startActivity(Intent.createChooser(send,"Поделиться записью")); }
+        try { screen.startActivity(Intent.createChooser(send,Lang.text(R.string.share_recording))); }
         catch (android.content.ActivityNotFoundException e) {
-            Toast.makeText(screen,"Нет приложения для отправки файла.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(screen,Lang.text(R.string.no_app_available_to_share_this_file),Toast.LENGTH_SHORT).show();
         }
     }
     private void play(Clips.Clip clip) {
@@ -215,7 +215,7 @@ final class Archive {
         } catch (IOException | RuntimeException error) { playbackError(); }
     }
     private void playbackError() {
-        endPlayback(); Toast.makeText(screen,"Файл недоступен для воспроизведения.",Toast.LENGTH_SHORT).show();
+        endPlayback(); Toast.makeText(screen,Lang.text(R.string.file_unavailable_for_playback),Toast.LENGTH_SHORT).show();
     }
     void endPlayback() {
         if (player == null) return;

@@ -12,7 +12,7 @@ Choose a 30-second replay and start capture before opening your game. When you h
 
 ## Getting started
 
-The app interface is in Russian. On the **Replay** tab (Повтор), tap **Source** (Источник) and choose what to record.
+Switch between Russian and English in **Settings → Language** (Настройки → Язык). Russian is the default. On the **Replay** tab (Повтор), tap **Source** (Источник) and choose what to record.
 
 | Source in the app | What goes into the clip |
 | --- | --- |

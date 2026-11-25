@@ -73,13 +73,13 @@ public final class Clips {
 
     static Clip extract(Context context, Clip source, int startMs, int endMs) throws IOException {
         try (ParcelFileDescriptor descriptor = context.getContentResolver().openFileDescriptor(source.uri,"r")) {
-            if (descriptor == null) throw new IOException("Файл недоступен");
+            if (descriptor == null) throw new IOException(Lang.text(R.string.file_unavailable));
             try (FileInputStream input = new ParcelFileDescriptor.AutoCloseInputStream(descriptor)) {
                 long pcmBytes = TelegramAudio.readHeader(new DataInputStream(input));
                 int frameBytes = RollingAudio.CHANNELS * 2;
                 long start = (long) startMs * RollingAudio.RATE / 1000 * frameBytes;
                 long end = endMs == source.durationMs ? pcmBytes : (long) endMs * RollingAudio.RATE / 1000 * frameBytes;
-                if (start < 0 || end > pcmBytes || end <= start) throw new IOException("Неверные границы");
+                if (start < 0 || end > pcmBytes || end <= start) throw new IOException(Lang.text(R.string.invalid_selection));
                 input.getChannel().position(44 + start);
                 int bytes = Math.toIntExact(end - start);
                 List<Integer> marks = new ArrayList<>();
@@ -90,7 +90,7 @@ public final class Clips {
                     byte[] block = new byte[65536];
                     for (int remaining=bytes; remaining>0;) {
                         int n=input.read(block,0,Math.min(block.length,remaining));
-                        if(n<=0) throw new IOException("Неполный WAV");
+                        if(n<=0) throw new IOException(Lang.text(R.string.incomplete_wav));
                         out.write(block,0,n);
                         remaining-=n;
                     }
@@ -111,18 +111,18 @@ public final class Clips {
         values.put(MediaStore.MediaColumns.IS_PENDING, 1);
         ContentResolver resolver = context.getContentResolver();
         Uri uri = resolver.insert(COLLECTION, values);
-        if (uri == null) throw new IOException("Не удалось создать файл");
+        if (uri == null) throw new IOException(Lang.text(R.string.could_not_create_file));
         boolean published = false;
         try {
             OutputStream raw = resolver.openOutputStream(uri, "w");
-            if (raw == null) throw new IOException("Файл недоступен");
+            if (raw == null) throw new IOException(Lang.text(R.string.file_unavailable));
             try (OutputStream out = new BufferedOutputStream(raw)) {
                 writeHeader(out, bytes);
                 writer.write(out);
             }
             values.clear();
             values.put(MediaStore.MediaColumns.IS_PENDING, 0);
-            if (resolver.update(uri, values, null, null) != 1) throw new IOException("Файл не опубликован");
+            if (resolver.update(uri, values, null, null) != 1) throw new IOException(Lang.text(R.string.file_was_not_published));
             published = true;
             ClipNotes.store(context, uri, marks);
             return new Clip(uri, name, System.currentTimeMillis(), bytes+44L);

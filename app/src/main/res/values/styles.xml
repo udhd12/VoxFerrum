@@ -1,4 +1,12 @@
 <resources>
+    <style name="ForgeDialog" parent="android:style/Theme.Material.Dialog.Alert">
+        <item name="android:colorAccent">#EAC382</item>
+        <item name="android:textColorPrimary">#F6E8CF</item>
+    </style>
+    <style name="TideDialog" parent="android:style/Theme.Material.Light.Dialog.Alert">
+        <item name="android:colorAccent">#105C69</item>
+        <item name="android:textColorPrimary">#102B35</item>
+    </style>
     <style name="AppTheme" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:windowBackground">#171513</item>

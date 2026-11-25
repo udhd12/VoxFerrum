@@ -15,8 +15,8 @@ public class ReplayTile extends TileService {
         if(tile==null) return;
         boolean active=ReplayService.running;
         tile.setState(active ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-        tile.setLabel(active ? "Сохранить повтор" : "Аудиоповтор");
-        tile.setSubtitle(active ? ReplayService.saving ? "Сохранение…" : ReplayWidget.duration(this) : "Включить");
+        tile.setLabel(active ? Lang.text(R.string.save_replay) : Lang.text(R.string.audio_replay));
+        tile.setSubtitle(active ? ReplayService.saving ? Lang.text(R.string.saving) : ReplayWidget.duration(this) : Lang.text(R.string.enable));
         tile.updateTile();
     }
     @Override public void onStartListening(){

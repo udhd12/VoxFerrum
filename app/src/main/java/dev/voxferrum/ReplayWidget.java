@@ -26,19 +26,22 @@ public class ReplayWidget extends AppWidgetProvider {
     }
     static String duration(Context c) {
         int sec=c.getSharedPreferences("vox",0).getInt("seconds",30);
-        return sec%60==0 ? sec/60+" мин" : sec+" с";
+        return sec%60==0 ? sec/60+Lang.text(R.string.min) : sec+Lang.text(R.string.s);
     }
     private static void render(Context c, AppWidgetManager mgr,int[] ids) {
         boolean active=ReplayService.running;
         RemoteViews v=new RemoteViews(c.getPackageName(),R.layout.replay_widget);
-        String state = !active ? "Захват выключен" : ReplayService.silent ? "В буфере тишина" :
-                "В эфире · "+duration(c);
+        String state = !active ? Lang.text(R.string.capture_off) : ReplayService.silent ? Lang.text(R.string.buffer_is_silent) :
+                Lang.text(R.string.live_alt)+duration(c);
         long now=android.os.SystemClock.elapsedRealtime();
         long recent=Math.max(ReplayService.markedAt, ReplayService.savedAt);
         if(active && recent>0 && now-recent<2200)
-            state=recent==ReplayService.markedAt ? "Метка добавлена" : "Повтор сохранён";
+            state=recent==ReplayService.markedAt ? Lang.text(R.string.marker_added) : Lang.text(R.string.replay_saved);
+        v.setTextViewText(R.id.widget_archive,Lang.text(R.string.widget_archive_link));
+        v.setTextViewText(R.id.widget_mark,Lang.text(R.string.mark));
+        v.setTextViewText(R.id.widget_stop,Lang.text(R.string.stop));
         v.setTextViewText(R.id.widget_state,state);
-        v.setTextViewText(R.id.widget_save,active ? ReplayService.saving?"Сохранение…":"Сохранить" : "Включить повтор");
+        v.setTextViewText(R.id.widget_save,active ? ReplayService.saving?Lang.text(R.string.saving):Lang.text(R.string.save_alt) : Lang.text(R.string.enable_replay));
         v.setOnClickPendingIntent(R.id.widget_save,active ? service(c,ReplayService.SAVE) : activity(c,ARM));
         v.setOnClickPendingIntent(R.id.widget_archive,activity(c,ARCHIVE));
         v.setOnClickPendingIntent(R.id.widget_mark,service(c,ReplayService.MARK));

@@ -36,16 +36,16 @@ final class TelegramUpload {
                 long pcmBytes = TelegramAudio.readHeader(wav);
                 if (pcmBytes + 44 <= MAX_BYTES) {
                     wav.reset();
-                    status.accept("Отправляем WAV в Telegram…");
+                    status.accept(Lang.text(R.string.sending_wav_to_telegram));
                     return post(account, filename, "audio/wav", wav, pcmBytes + 44);
                 }
-                status.accept("Готовим копию M4A для Telegram…");
+                status.accept(Lang.text(R.string.preparing_an_m4a_copy_for_telegram));
                 return sendCompressed(context, account, filename, wav, pcmBytes, status);
             }
         } catch (FileNotFoundException | SecurityException unavailable) {
-            return "Не удалось открыть выбранный клип. Проверьте, есть ли он в архиве.";
+            return Lang.text(R.string.could_not_open_this_clip_check_the);
         } catch (IOException | RuntimeException failure) {
-            return "Не удалось подготовить аудиофайл. Проверьте свободное место или отправьте WAV через «Поделиться».";
+            return Lang.text(R.string.could_not_prepare_audio_check_storage_or);
         }
     }
 
@@ -57,12 +57,12 @@ final class TelegramUpload {
             // Even process death during encoding/upload then frees this private copy.
             if (!path.delete()) throw new IOException("Cannot unlink temporary file");
             TelegramAudio.encode(pcm, bytes, copy.getFD(),
-                    percent -> status.accept("Готовим копию M4A · " + percent + " %"));
+                    percent -> status.accept(Lang.text(R.string.preparing_m4a_copy) + percent + " %"));
             long length = copy.length();
             if (length <= 0 || length > MAX_BYTES) throw new IOException("Invalid M4A size");
             copy.seek(0);
             String m4a = name.replaceFirst("(?i)\\.wav$", "") + ".m4a";
-            status.accept("Отправляем M4A в Telegram…");
+            status.accept(Lang.text(R.string.sending_m4a_to_telegram));
             try (FileInputStream stream = new FileInputStream(copy.getFD())) {
                 return post(account, m4a, "audio/mp4", stream, length);
             }
@@ -119,17 +119,17 @@ final class TelegramUpload {
                 if (new JSONObject(response.toString()).optBoolean("ok")) return null;
             }
             switch (status) {
-                case 400: return "Проверьте ID чата и откройте чат с ботом кнопкой «Старт».";
+                case 400: return Lang.text(R.string.check_the_chat_id_and_tap_start);
                 case 401:
-                case 404: return "Telegram отклонил токен. Проверьте его в настройках бота.";
-                case 403: return "Боту запрещено писать в этот чат. Проверьте блокировку или права в группе.";
-                case 413: return "Telegram отклонил размер файла. Выберите клип короче.";
-                case 429: return "Telegram ограничил частоту запросов. Попробуйте позже.";
-                default: return "Telegram не подтвердил доставку (HTTP " + status + "). Проверьте чат.";
+                case 404: return Lang.text(R.string.telegram_rejected_the_token_check_bot_settings);
+                case 403: return Lang.text(R.string.the_bot_cannot_post_in_this_chat);
+                case 413: return Lang.text(R.string.telegram_rejected_the_file_size_choose_a);
+                case 429: return Lang.text(R.string.telegram_is_rate_limiting_requests_try_again);
+                default: return Lang.text(R.string.telegram_did_not_confirm_delivery_http) + status + Lang.text(R.string.check_the_chat);
             }
         } catch (Exception failure) {
             // Network exceptions may contain the full URL, which includes a bot credential.
-            return "Не удалось подтвердить доставку. Проверьте сеть и чат перед повторной отправкой.";
+            return Lang.text(R.string.delivery_unconfirmed_check_your_connection_and_chat);
         } finally {
             if (connection != null) connection.disconnect();
         }

@@ -191,30 +191,30 @@ final class CaptureInputs {
     String microphoneRoute() {
         if (microphone == null) return "";
         AudioDeviceInfo device = microphone.getRoutedDevice();
-        String label = "Системный вход";
+        String label = Lang.text(R.string.system_input);
         if (device != null) {
             switch (device.getType()) {
-                case AudioDeviceInfo.TYPE_BUILTIN_MIC: label = "Встроенный микрофон"; break;
-                case AudioDeviceInfo.TYPE_WIRED_HEADSET: label = "Проводная гарнитура"; break;
+                case AudioDeviceInfo.TYPE_BUILTIN_MIC: label = Lang.text(R.string.built_in_microphone); break;
+                case AudioDeviceInfo.TYPE_WIRED_HEADSET: label = Lang.text(R.string.wired_headset); break;
                 case AudioDeviceInfo.TYPE_BLUETOOTH_SCO:
-                case AudioDeviceInfo.TYPE_BLE_HEADSET: label = "Гарнитура Bluetooth"; break;
+                case AudioDeviceInfo.TYPE_BLE_HEADSET: label = Lang.text(R.string.bluetooth_headset); break;
                 case AudioDeviceInfo.TYPE_USB_DEVICE:
-                case AudioDeviceInfo.TYPE_USB_HEADSET: label = "USB-микрофон"; break;
+                case AudioDeviceInfo.TYPE_USB_HEADSET: label = Lang.text(R.string.usb_microphone); break;
                 default:
                     if (device.getProductName() != null) label = device.getProductName().toString();
             }
-            if (preferBuiltin && device.getType() != AudioDeviceInfo.TYPE_BUILTIN_MIC) label += " (выбор Android)";
+            if (preferBuiltin && device.getType() != AudioDeviceInfo.TYPE_BUILTIN_MIC) label += Lang.text(R.string.selected_by_android);
         }
-        return String.format(new Locale("ru"), "%s · %s Гц", label, microphone.getSampleRate());
+        return String.format(Lang.locale(), Lang.text(R.string.s_s_hz), label, microphone.getSampleRate());
     }
 
     String microphonePolicyWarning() {
         if (microphone == null) return "";
         if (audioManager.isMicrophoneMute())
-            return "Микрофон выключен в Android. Включите доступ к микрофону в быстрых настройках.";
+            return Lang.text(R.string.android_microphone_access_is_off_enable_it);
         AudioRecordingConfiguration state = microphone.getActiveRecordingConfiguration();
         if (state != null && state.isClientSilenced())
-            return "Android заглушил микрофон для Vox Ferrum. Проверьте системный доступ и закройте другие приложения, использующие микрофон.";
+            return Lang.text(R.string.android_has_silenced_vox_ferrum_check_microphone);
         return "";
     }
 
