@@ -70,7 +70,7 @@
     <string name="audio_source" formatted="false">"Источник звука"</string>
     <string name="source" formatted="false">"Источник"</string>
     <string name="recording_priority" formatted="false">"Приоритет записи"</string>
-    <string name="if_another_app_uses_the_microphone_vox" formatted="false">"При конфликте Vox Ferrum запросит микрофон для себя. Голосовой чат игры может перестать слышать вас."</string>
+    <string name="if_another_app_uses_the_microphone_vox" formatted="false">"При конфликте Vox Ferrum запросит микрофон для себя. Другое приложение может потерять доступ к микрофону."</string>
     <string name="microphone_input_level" formatted="false">"Уровень отдельного сигнала микрофона"</string>
     <string name="stop_capture" formatted="false">"Остановить захват"</string>
     <string name="mark" formatted="false">"Метка"</string>
@@ -112,7 +112,7 @@
     <string name="add_widget" formatted="false">"Добавить виджет"</string>
     <string name="add_quick_settings_tile" formatted="false">"Добавить плитку в шторку"</string>
     <string name="audio_capture" formatted="false">"Захват звука"</string>
-    <string name="choose_a_source_on_the_replay_tab" formatted="false">"Источник выбирается на вкладке «Повтор» до начала захвата. Микрофон записывает звуки вокруг телефона. Звук игр и проигрывателей доступен, если приложение разрешает захват. В совместном режиме оба источника сохраняются в одном аудиофайле."</string>
+    <string name="choose_a_source_on_the_replay_tab" formatted="false">"Источник выбирается на вкладке «Повтор» до начала захвата. Микрофон записывает звуки вокруг телефона. Звук приложения доступен, если оно разрешает захват. В совместном режиме оба источника сохраняются в одном аудиофайле."</string>
     <string name="replay_notifications" formatted="false">"Уведомления повтора"</string>
     <string name="touch_and_hold_an_empty_area_on" formatted="false">"Удерживайте пустое место на рабочем столе, откройте «Виджеты» и выберите Vox Ferrum."</string>
     <string name="got_it" formatted="false">"Понятно"</string>
@@ -128,7 +128,7 @@
     <string name="app_audio_restore_canceled" formatted="false">"Возврат звука приложений отменён."</string>
     <string name="capture_canceled" formatted="false">"Захват отменён."</string>
     <string name="could_not_start_capture_open_the_app" formatted="false">"Не удалось включить захват. Откройте приложение и попробуйте снова."</string>
-    <string name="no_sound_for_12_seconds_check_playback" formatted="false">"Уже 12 секунд без звука. Проверьте воспроизведение и разрешает ли игра захват."</string>
+    <string name="no_sound_for_12_seconds_check_playback" formatted="false">"Уже 12 секунд без звука. Проверьте воспроизведение и разрешает ли приложение захват."</string>
     <string name="app_audio_disconnected_microphone_recording_continues" formatted="false">"Звук приложений отключён. Микрофон продолжает запись."</string>
     <string name="no_sound_for_12_seconds_check_the" formatted="false">"Уже 12 секунд без звука. Проверьте микрофон и его системный выключатель."</string>
     <string name="no_sound_for_12_seconds_check_the_alt" formatted="false">"Уже 12 секунд без звука. Проверьте микрофон и воспроизведение в приложении."</string>

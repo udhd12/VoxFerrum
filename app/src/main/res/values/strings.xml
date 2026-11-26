@@ -70,7 +70,7 @@
     <string name="audio_source" formatted="false">"Audio source"</string>
     <string name="source" formatted="false">"Source"</string>
     <string name="recording_priority" formatted="false">"Recording priority"</string>
-    <string name="if_another_app_uses_the_microphone_vox" formatted="false">"If another app uses the microphone, Vox Ferrum will request priority. Game voice chat may lose microphone input."</string>
+    <string name="if_another_app_uses_the_microphone_vox" formatted="false">"If another app uses the microphone, Vox Ferrum will request priority. Other apps may lose microphone input."</string>
     <string name="microphone_input_level" formatted="false">"Microphone input level"</string>
     <string name="stop_capture" formatted="false">"Stop capture"</string>
     <string name="mark" formatted="false">"Mark"</string>
@@ -112,7 +112,7 @@
     <string name="add_widget" formatted="false">"Add widget"</string>
     <string name="add_quick_settings_tile" formatted="false">"Add Quick Settings tile"</string>
     <string name="audio_capture" formatted="false">"Audio capture"</string>
-    <string name="choose_a_source_on_the_replay_tab" formatted="false">"Choose a source on the Replay tab before starting. The microphone records nearby sound. Games and players can allow audio capture. Mixed mode saves both sources in one file."</string>
+    <string name="choose_a_source_on_the_replay_tab" formatted="false">"Choose a source on the Replay tab before starting. The microphone records nearby sound. App audio is available when the source app allows capture. Mixed mode saves both sources in one file."</string>
     <string name="replay_notifications" formatted="false">"Replay notifications"</string>
     <string name="touch_and_hold_an_empty_area_on" formatted="false">"Touch and hold an empty area on your home screen, open Widgets and choose Vox Ferrum."</string>
     <string name="got_it" formatted="false">"Got it"</string>
@@ -128,7 +128,7 @@
     <string name="app_audio_restore_canceled" formatted="false">"App audio restore canceled."</string>
     <string name="capture_canceled" formatted="false">"Capture canceled."</string>
     <string name="could_not_start_capture_open_the_app" formatted="false">"Could not start capture. Open the app and try again."</string>
-    <string name="no_sound_for_12_seconds_check_playback" formatted="false">"No sound for 12 seconds. Check playback and whether the game allows capture."</string>
+    <string name="no_sound_for_12_seconds_check_playback" formatted="false">"No sound for 12 seconds. Check playback and whether the source app allows capture."</string>
     <string name="app_audio_disconnected_microphone_recording_continues" formatted="false">"App audio disconnected. Microphone recording continues."</string>
     <string name="no_sound_for_12_seconds_check_the" formatted="false">"No sound for 12 seconds. Check the microphone and Android microphone access."</string>
     <string name="no_sound_for_12_seconds_check_the_alt" formatted="false">"No sound for 12 seconds. Check the microphone and app playback."</string>

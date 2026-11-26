@@ -6,7 +6,7 @@ Vox Ferrum is an audio-only instant replay app for Android 10 and later. It keep
 
 ### How to save the last 30 seconds of audio on Android
 
-Choose a 30-second replay and start capture before opening your game. When you hear something you want to keep, expand the Vox Ferrum notification and tap **Save**. The clip appears in your archive, and the buffer keeps recording.
+Choose a 30-second replay and start capture before your rehearsal. When you hear something you want to keep, expand the Vox Ferrum notification and tap **Save**. The clip appears in your archive, and the buffer keeps recording.
 
 [![Download the 15-second illustrated walkthrough with sample audio](docs/replay-preview.png)](https://github.com/udhd12/VoxFerrum/releases/download/v1.3.3/VoxFerrum-demo.mp4)
 
@@ -16,19 +16,19 @@ Vox Ferrum follows your system language preferences and supports English and Rus
 
 | Source in the app | What goes into the clip |
 | --- | --- |
-| App audio | Audio from games and players that allow playback capture |
+| App audio | Audio from apps that allow playback capture |
 | Microphone | Your voice and sounds around the phone |
 | Apps + microphone | App audio and microphone input mixed into one WAV. Use headphones to keep the microphone from picking up the speakers a second time. |
 
-1. Open Vox Ferrum before starting your game. Choose a replay length of 15 or 30 seconds, or 1, 2, 5, 10, or 15 minutes. Export gain ranges from 0 to +18 dB. At 0 dB, the saved samples keep their original levels.
+1. Open Vox Ferrum before the sound you want to keep. Choose a replay length of 15 or 30 seconds, or 1, 2, 5, 10, or 15 minutes. Export gain ranges from 0 to +18 dB. At 0 dB, the saved samples keep their original levels.
 2. Tap **Enable replay** and grant microphone access. To capture app audio, also accept the Android screen-sharing prompt. Vox Ferrum uses it to capture audio only. Microphone-only mode needs just the microphone permission.
 3. To keep a moment, expand the Vox Ferrum notification and tap **Save**. Capture continues while the clip is saved. If the buffer has not filled yet, the clip contains the audio collected so far.
 4. Open **Archive** to listen or share. You can also find the WAV files in `Music/VoxFerrum` on your phone. To switch sources, stop capture first. Stopping clears the temporary buffer.
 5. Under **Settings → Appearance**, choose **Forge of the Omnissiah** or **Tide**.
 
-Short replays use RAM. Longer replays use temporary segments in the app’s private storage. Allow up to 175 MB for a 15-minute buffer and another 173 MB to save a full-length WAV. If you increase the replay length during a game, the extra history builds up from that point. The counter shows how much audio is available.
+Short replays use RAM. Longer replays use temporary segments in the app’s private storage. Allow up to 175 MB for a 15-minute buffer and another 173 MB to save a full-length WAV. If you increase the replay length during capture, the extra history builds up from that point. The counter shows how much audio is available.
 
-Games and players can block playback capture. Their audio will be silent in the clip. Call recording is unsupported. [Android playback capture restrictions](https://developer.android.com/media/platform/av-capture)
+Apps can block playback capture. Their audio will be silent in the clip. Call recording is unsupported. [Android playback capture restrictions](https://developer.android.com/media/platform/av-capture)
 
 ## Background recording
 
@@ -41,7 +41,7 @@ On Android 15 QPR1 and later, locking the screen can end the system’s playback
 1. Choose a source that includes the microphone, start replay, and say a few words. The **Microphone signal** meter shows the input level before mixing. The active input and sample rate appear beside it.
 2. If a headset is connected, stop capture and try **Input → Built-in phone microphone**. Android makes the final routing decision.
 3. Check the app’s microphone permission, Android’s **Microphone access** switch, and any other apps recording your voice. Vox Ferrum shows a specific warning when Android reports that it has silenced the input.
-4. If the microphone cuts out when a game opens, stop replay, select a microphone source, and enable **Recording priority** before restarting. On Android 11 and later, this asks Android to treat the recording as privacy-sensitive. The game’s voice chat may then lose microphone input. The setting is off by default. Calls retain priority, and system access restrictions still apply. [How Android shares audio input](https://developer.android.com/media/platform/sharing-audio-input)
+4. If the microphone cuts out when another app opens, stop replay, select a microphone source, and enable **Recording priority** before restarting. On Android 11 and later, this asks Android to treat the recording as privacy-sensitive. The other app may then lose microphone input. The setting is off by default. Calls retain priority, and system access restrictions still apply. [How Android shares audio input](https://developer.android.com/media/platform/sharing-audio-input)
 
 ## After a reboot or power-off
 
