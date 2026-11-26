@@ -12,19 +12,19 @@ Choose a 30-second replay and start capture before opening your game. When you h
 
 ## Getting started
 
-Switch between Russian and English in **Settings → Language** (Настройки → Язык). Russian is the default. On the **Replay** tab (Повтор), tap **Source** (Источник) and choose what to record.
+Vox Ferrum follows your system language preferences and supports English and Russian. If neither is listed, it uses English. To override this, open **Settings → Language**. Choose **System default** to follow the phone again. On the **Replay** tab, tap **Source** and choose what to record.
 
 | Source in the app | What goes into the clip |
 | --- | --- |
-| Звук приложений | Audio from games and players that allow playback capture |
-| Микрофон | Your voice and sounds around the phone |
-| Приложения + микрофон | App audio and microphone input mixed into one WAV. Use headphones to keep the microphone from picking up the speakers a second time. |
+| App audio | Audio from games and players that allow playback capture |
+| Microphone | Your voice and sounds around the phone |
+| Apps + microphone | App audio and microphone input mixed into one WAV. Use headphones to keep the microphone from picking up the speakers a second time. |
 
 1. Open Vox Ferrum before starting your game. Choose a replay length of 15 or 30 seconds, or 1, 2, 5, 10, or 15 minutes. Export gain ranges from 0 to +18 dB. At 0 dB, the saved samples keep their original levels.
-2. Tap **Enable replay** (Включить повтор) and grant microphone access. To capture app audio, also accept the Android screen-sharing prompt. Vox Ferrum uses it to capture audio only. Microphone-only mode needs just the microphone permission.
-3. To keep a moment, expand the Vox Ferrum notification and tap **Save** (Сохранить). Capture continues while the clip is saved. If the buffer has not filled yet, the clip contains the audio collected so far.
-4. Open **Archive** (Архив) to listen or share. You can also find the WAV files in `Music/VoxFerrum` on your phone. To switch sources, stop capture first. Stopping clears the temporary buffer.
-5. Under **Settings → Appearance** (Настройки → Оформление), choose **Forge of the Omnissiah** or **Tide**.
+2. Tap **Enable replay** and grant microphone access. To capture app audio, also accept the Android screen-sharing prompt. Vox Ferrum uses it to capture audio only. Microphone-only mode needs just the microphone permission.
+3. To keep a moment, expand the Vox Ferrum notification and tap **Save**. Capture continues while the clip is saved. If the buffer has not filled yet, the clip contains the audio collected so far.
+4. Open **Archive** to listen or share. You can also find the WAV files in `Music/VoxFerrum` on your phone. To switch sources, stop capture first. Stopping clears the temporary buffer.
+5. Under **Settings → Appearance**, choose **Forge of the Omnissiah** or **Tide**.
 
 Short replays use RAM. Longer replays use temporary segments in the app’s private storage. Allow up to 175 MB for a 15-minute buffer and another 173 MB to save a full-length WAV. If you increase the replay length during a game, the extra history builds up from that point. The counter shows how much audio is available.
 
@@ -34,14 +34,14 @@ Games and players can block playback capture. Their audio will be silent in the 
 
 Once replay is running, you can switch apps or swipe Vox Ferrum away from Recents. Use the notification to save a clip or stop recording.
 
-On Android 15 QPR1 and later, locking the screen can end the system’s playback capture session. In mixed mode, the microphone continues recording into the same buffer. After unlocking, open **Replay → Restore app audio** (Вернуть звук приложений) and approve the new Android prompt. App audio resumes from that moment. Powering off the phone or force-stopping Vox Ferrum ends recording. [Android media projection behavior](https://developer.android.com/media/grow/media-projection)
+On Android 15 QPR1 and later, locking the screen can end the system’s playback capture session. In mixed mode, the microphone continues recording into the same buffer. After unlocking, open **Replay → Restore app audio** and approve the new Android prompt. App audio resumes from that moment. Powering off the phone or force-stopping Vox Ferrum ends recording. [Android media projection behavior](https://developer.android.com/media/grow/media-projection)
 
 ## If the microphone is silent
 
-1. Choose a source that includes the microphone, start replay, and say a few words. The **Microphone signal** meter (Сигнал микрофона) shows the input level before mixing. The active input and sample rate appear beside it.
-2. If a headset is connected, stop capture and try **Input → Built-in phone microphone** (Вход → Встроенный микрофон телефона). Android makes the final routing decision.
+1. Choose a source that includes the microphone, start replay, and say a few words. The **Microphone signal** meter shows the input level before mixing. The active input and sample rate appear beside it.
+2. If a headset is connected, stop capture and try **Input → Built-in phone microphone**. Android makes the final routing decision.
 3. Check the app’s microphone permission, Android’s **Microphone access** switch, and any other apps recording your voice. Vox Ferrum shows a specific warning when Android reports that it has silenced the input.
-4. If the microphone cuts out when a game opens, stop replay, select a microphone source, and enable **Recording priority** (Приоритет записи) before restarting. On Android 11 and later, this asks Android to treat the recording as privacy-sensitive. The game’s voice chat may then lose microphone input. The setting is off by default. Calls retain priority, and system access restrictions still apply. [How Android shares audio input](https://developer.android.com/media/platform/sharing-audio-input)
+4. If the microphone cuts out when a game opens, stop replay, select a microphone source, and enable **Recording priority** before restarting. On Android 11 and later, this asks Android to treat the recording as privacy-sensitive. The game’s voice chat may then lose microphone input. The setting is off by default. Calls retain priority, and system access restrictions still apply. [How Android shares audio input](https://developer.android.com/media/platform/sharing-audio-input)
 
 ## After a reboot or power-off
 
@@ -55,11 +55,11 @@ In Vox Ferrum settings, tap **Add Quick Settings tile** or **Add widget**. If yo
 
 The start control uses your selected source and opens the system consent dialog when needed. During recording, tap the tile to save a replay. The widget also lets you add a marker, stop capture, or open the archive. On phones with vibration support, a short vibration confirms a successful save.
 
-Tap **Mark** (Метка) in the app, widget, or notification to mark the current moment. Each saved clip includes the markers that fall within its time range. Their positions are stored in the app. After 12 seconds of near-silence, Vox Ferrum displays a hint. In the Forge theme, the red lens indicates active capture, the brass arc shows how much of the replay window is full, and a wax seal briefly appears when a clip is saved.
+Tap **Mark** in the app, widget, or notification to mark the current moment. Each saved clip includes the markers that fall within its time range. Their positions are stored in the app. After 12 seconds of near-silence, Vox Ferrum displays a hint. In the Forge theme, the red lens indicates active capture, the brass arc shows how much of the replay window is full, and a wax seal briefly appears when a clip is saved.
 
 ## Trimming and managing clips
 
-Open **Archive → Trim** (Архив → Обрезать). Drag a selection boundary on the waveform or use the sliders. The **−** and **+** buttons move the boundary by 0.1 seconds. Selecting a marker picks up to five seconds on either side of it.
+Open **Archive → Trim**. Drag a selection boundary on the waveform or use the sliders. The **−** and **+** buttons move the boundary by 0.1 seconds. Selecting a marker picks up to five seconds on either side of it.
 
 Tap **Listen to selection**, then **Send selection…** and choose the Telegram bot or Android’s share menu. A trimmed selection is saved as a separate WAV with the markers inside it. Selecting the entire recording uses the original file.
 

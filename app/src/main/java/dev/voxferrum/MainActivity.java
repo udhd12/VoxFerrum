@@ -487,11 +487,12 @@ public final class MainActivity extends Activity {
 
     private void settings() {
         body.addView(text(Lang.text(R.string.settings),29,skin.ink,skin.display)); space(body,12);
-        body.addView(button(Lang.text(R.string.language) + " · " + (Lang.english() ? "English" : "Русский"), false, v ->
-            new VoxMenu(this).setTitle("Русский / English").setSingleChoiceItems(
-                new String[]{"Русский", "English"}, Lang.english() ? 1 : 0, (dialog, index) -> {
+        String[] languages = {Lang.text(R.string.system_language), "Русский", "English"};
+        body.addView(button(Lang.text(R.string.language) + " · " + languages[Lang.choice(this)], false, v ->
+            new VoxMenu(this).setTitle(Lang.text(R.string.language)).setSingleChoiceItems(
+                languages, Lang.choice(this), (dialog, index) -> {
                     dialog.dismiss();
-                    Lang.select(this, index == 1);
+                    Lang.select(this, index);
                     drawPage();
                 }).setNegativeButton(Lang.text(R.string.cancel), null).show()));
         space(body,12);

@@ -407,6 +407,11 @@ public class ReplayService extends Service implements SharedPreferences.OnShared
         sendBroadcast(new Intent(CHANGED).setPackage(getPackageName()));
     }
 
+    @Override public void onConfigurationChanged(android.content.res.Configuration config) {
+        super.onConfigurationChanged(config);
+        if (foreground) main.post(this::changed);
+    }
+
     @Override public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         if (foreground && ("seconds".equals(key) || "english".equals(key))) changed();
     }
